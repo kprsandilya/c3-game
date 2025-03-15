@@ -102,7 +102,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[font_size=24]Placeholder[/font_size]"
+text = "[font_size=24]UP[/font_size]"
 fit_content = true
 
 [node name="Button" type="Button" parent="HBoxContainer/Settings"]
@@ -118,7 +118,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[font_size=24]Placeholder[/font_size]"
+text = "[font_size=24]Down[/font_size]"
 fit_content = true
 
 [node name="Button2" type="Button" parent="HBoxContainer/HBoxContainer"]
@@ -135,7 +135,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[font_size=24]Placeholder[/font_size]"
+text = "[font_size=24]Left[/font_size]"
 fit_content = true
 
 [node name="Button3" type="Button" parent="HBoxContainer/HBoxContainer2"]
@@ -152,7 +152,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[font_size=24]Placeholder[/font_size]"
+text = "[font_size=24]Right[/font_size]"
 fit_content = true
 
 [node name="Button3" type="Button" parent="HBoxContainer/HBoxContainer3"]
