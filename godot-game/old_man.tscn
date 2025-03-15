@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ysfevjradsp"]
+
+[ext_resource type="Texture2D" uid="uid://cwono3n8f0b3f" path="res://old_man.png" id="1_c4caq"]
+[ext_resource type="Script" path="res://old_man.gd" id="1_v5rg1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ik6ny"]
+radius = 36.0
+height = 148.0
+
+[node name="OldMan" type="Node2D"]
+
+[node name="Sprite2D" type="RigidBody2D" parent="."]
+disable_mode = 1
+collision_layer = 2
+script = ExtResource("1_v5rg1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(10, 0)
+texture = ExtResource("1_c4caq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
+shape = SubResource("CapsuleShape2D_ik6ny")

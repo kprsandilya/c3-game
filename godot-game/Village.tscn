@@ -1,13 +1,22 @@
-[gd_scene load_steps=14 format=4 uid="uid://bcusd7ue7skrr"]
+[gd_scene load_steps=23 format=4 uid="uid://bcusd7ue7skrr"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_d7o40"]
 [ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
 [ext_resource type="Texture2D" uid="uid://3746cuthvauv" path="res://villageBackground.png" id="1_wgxkk"]
-[ext_resource type="Texture2D" uid="uid://c5a3fipxj0yty" path="res://playerGrey_up1.png" id="2_qy21v"]
-[ext_resource type="Texture2D" uid="uid://buffcws4q36wh" path="res://playerGrey_up2.png" id="3_8dir7"]
-[ext_resource type="Texture2D" uid="uid://b8rxuco2ewm6q" path="res://playerGrey_walk1.png" id="4_moels"]
-[ext_resource type="Texture2D" uid="uid://dm7dn2eopttcm" path="res://playerGrey_walk2.png" id="5_u10h8"]
+[ext_resource type="Texture2D" uid="uid://b055g77h081gr" path="res://Walking down farmer-1.png.png" id="5_sudyf"]
+[ext_resource type="Texture2D" uid="uid://ede1b6kqrkoy" path="res://Walking down farmer-2.png.png" id="6_ih5cb"]
 [ext_resource type="Texture2D" uid="uid://qatb87ldb2bu" path="res://combined.png" id="7_hdfpe"]
+[ext_resource type="Texture2D" uid="uid://caxj6gabuxcbi" path="res://Walking down farmer-3.png.png" id="7_u8fs3"]
+[ext_resource type="Texture2D" uid="uid://dvapfp6ol7c6f" path="res://Walking down farmer-4.png.png" id="8_h4t1t"]
+[ext_resource type="Texture2D" uid="uid://jhmrswjlywfn" path="res://Walking up farmer-1.png.png" id="9_k1e5d"]
+[ext_resource type="Texture2D" uid="uid://botodptuscdpg" path="res://Walking up farmer-2.png.png" id="10_txde1"]
+[ext_resource type="Texture2D" uid="uid://bwfsqmnu1fel7" path="res://Walking up farmer-3.png.png" id="11_bm30n"]
+[ext_resource type="Texture2D" uid="uid://d4c3kxyowre03" path="res://Walking up farmer-4.png.png" id="12_p3djk"]
+[ext_resource type="Texture2D" uid="uid://dsv1rmcr4cw3n" path="res://Walking farmer-1.png (1).png" id="13_678im"]
+[ext_resource type="Texture2D" uid="uid://b2toeqhi1wjti" path="res://Walking farmer-2.png (1).png" id="14_f7mvi"]
+[ext_resource type="Texture2D" uid="uid://djau0n7ii5dxc" path="res://Walking farmer-3.png (1).png" id="15_w48lo"]
+[ext_resource type="Texture2D" uid="uid://daoeoo60sgtw3" path="res://Walking farmer-4.png (1).png" id="16_suube"]
+[ext_resource type="PackedScene" uid="uid://c5ysfevjradsp" path="res://old_man.tscn" id="17_uejo6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cuvet"]
 texture = ExtResource("7_hdfpe")
@@ -31,14 +40,37 @@ func _ready():
 	collision_enabled = true
 "
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_t47ko"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_kggce"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_qy21v")
+"texture": ExtResource("5_sudyf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_8dir7")
+"texture": ExtResource("6_ih5cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u8fs3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_h4t1t")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_k1e5d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_txde1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bm30n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p3djk")
 }],
 "loop": true,
 "name": &"up",
@@ -46,17 +78,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_moels")
+"texture": ExtResource("13_678im")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_u10h8")
+"texture": ExtResource("14_f7mvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_w48lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_suube")
 }],
 "loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wh6ys"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyjgf"]
 radius = 28.0
 height = 70.0
 
@@ -74,20 +112,26 @@ tile_set = SubResource("TileSet_d3hrt")
 use_kinematic_bodies = true
 script = SubResource("GDScript_o87fu")
 
-[node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(555, 540)
+[node name="player2" type="CharacterBody2D" parent="."]
+position = Vector2(316, 555)
+scale = Vector2(2, 2.169)
+collision_mask = 3
 script = ExtResource("1_d7o40")
+metadata/_edit_group_ = true
 
-[node name="sprite" type="AnimatedSprite2D" parent="player"]
-scale = Vector2(0.5, 0.5)
-sprite_frames = SubResource("SpriteFrames_t47ko")
+[node name="sprite" type="AnimatedSprite2D" parent="player2"]
+sprite_frames = SubResource("SpriteFrames_kggce")
 animation = &"up"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-shape = SubResource("CapsuleShape2D_wh6ys")
+[node name="player_hitbox" type="CollisionShape2D" parent="player2"]
+scale = Vector2(0.464353, 0.582693)
+shape = SubResource("CapsuleShape2D_kyjgf")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="player2"]
 limit_left = 0
 limit_top = 0
 limit_right = 2592
 limit_bottom = 648
+
+[node name="OldMan" parent="." instance=ExtResource("17_uejo6")]
+position = Vector2(1553, 429)

@@ -29,9 +29,8 @@ func _process(delta):
 	if direction_timer <= 0:
 		set_random_direction()
 		direction_timer = direction_change_time
-		
-		if position.x - x_size < 0 or position.x + x_size > screen_size.x:
-			print(position, screen_size)
+
+		if global_position.x - x_size < 0 or global_position.x + x_size > screen_size.x:
 			queue_free()
 
 func set_random_direction():

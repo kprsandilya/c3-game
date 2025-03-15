@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://byilpdeb716nr"]
+[gd_scene load_steps=6 format=3 uid="uid://bnihq2lqqv0cd"]
 
 [ext_resource type="Script" path="res://option.gd" id="1_7yjx3"]
 [ext_resource type="Script" path="res://Remap.gd" id="2_2nsca"]
