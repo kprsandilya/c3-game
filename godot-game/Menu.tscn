@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpfdao5jvim86"]
+[gd_scene load_steps=3 format=3 uid="uid://cpfdao5jvim86"]
 
 [ext_resource type="Script" path="res://menu.gd" id="1_l63f1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifjjh"]
+bg_color = Color(0.367209, 0.660315, 0.639465, 1)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,6 +14,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l63f1")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ifjjh")
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -18,17 +30,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -190.0
-offset_top = -139.0
-offset_right = 102.0
-offset_bottom = 58.0
+offset_left = -291.0
+offset_top = -182.0
+offset_right = 291.0
+offset_bottom = 182.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 150
 
 [node name="Title" type="RichTextLabel" parent="VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "GAME NAME"
+bbcode_enabled = true
+text = "[center][font_size=60]GAME NAME[/font_size][/center]"
+fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 layout_mode = 2
