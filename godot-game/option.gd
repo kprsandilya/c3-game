@@ -15,3 +15,7 @@ func _process(delta: float) -> void:
 
 func _on_option_item_selected(index: int) -> void:
 	print(index)
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Menu.tscn")
