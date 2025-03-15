@@ -40,3 +40,7 @@ func _process(delta):
 		
 	
 	var collision = move_and_collide(velocity * delta)
+
+
+func _on_visibility_screen_exited():
+	get_tree().change_scene_to_file("res://Village.tscn") # Replace with function body.
