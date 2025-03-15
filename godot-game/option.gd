@@ -3,8 +3,9 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HBoxContainer/Settings/Option.get_popup().add_theme_font_size_override("font_size", 24)
-	$HBoxContainer/Settings/Option.selected = 0
+	var dropdown = $HBoxContainer/Names/Option
+	dropdown.get_popup().add_theme_font_size_override("font_size", 24)
+	dropdown.selected = 0
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

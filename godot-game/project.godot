@@ -15,6 +15,14 @@ run/main_scene="res://Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+KeyPersistence="*res://Key Persistence.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
 [gui]
 
 theme/custom_font="res://Hanalei_Fill/HanaleiFill-Regular.ttf"
