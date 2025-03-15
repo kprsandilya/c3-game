@@ -33,8 +33,10 @@ func _process(delta):
 		$sprite.flip_v = false
 		$sprite.flip_h = velocity.x < 0
 	elif velocity.y != 0:
-		$sprite.animation = "up"
-		$sprite.flip_v = true
-		$sprite.flip_v = velocity.y > 0
+		if velocity.y < 0:
+			$sprite.animation = "up"
+		else:
+			$sprite.animation = "down"
 		
+	
 	var collision = move_and_collide(velocity * delta)
