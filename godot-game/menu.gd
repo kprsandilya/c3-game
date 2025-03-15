@@ -18,6 +18,7 @@ func _on_start_pressed() -> void:
 
 func _on_option_pressed() -> void:
 	print("OPTION")
+	get_tree().change_scene_to_file("res://Option.tscn")
 
 
 func _on_quit_pressed() -> void:
