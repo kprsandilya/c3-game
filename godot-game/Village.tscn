@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=4 uid="uid://bcusd7ue7skrr"]
+[gd_scene load_steps=14 format=4 uid="uid://bcusd7ue7skrr"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_d7o40"]
+[ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
 [ext_resource type="Texture2D" uid="uid://3746cuthvauv" path="res://villageBackground.png" id="1_wgxkk"]
 [ext_resource type="Texture2D" uid="uid://c5a3fipxj0yty" path="res://playerGrey_up1.png" id="2_qy21v"]
 [ext_resource type="Texture2D" uid="uid://buffcws4q36wh" path="res://playerGrey_up2.png" id="3_8dir7"]
@@ -60,6 +61,7 @@ radius = 28.0
 height = 70.0
 
 [node name="Village" type="Node2D"]
+script = ExtResource("1_qen8r")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 2592.0
