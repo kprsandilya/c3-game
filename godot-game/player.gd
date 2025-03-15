@@ -36,10 +36,5 @@ func _process(delta):
 		$sprite.animation = "up"
 		$sprite.flip_v = true
 		$sprite.flip_v = velocity.y > 0
-	
-	
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
 		
-		
-		
+	var collision = move_and_collide(velocity * delta)
