@@ -22,7 +22,7 @@ offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button2" type="Button" parent="VBoxContainer2"]
+[node name="Button2" type="RichTextLabel" parent="VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "GAME NAME"
