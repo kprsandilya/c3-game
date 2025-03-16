@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://cdrtq37isbgq4"]
+[gd_scene load_steps=24 format=4 uid="uid://cdrtq37isbgq4"]
 
+[ext_resource type="Script" path="res://farmManager.gd" id="1_kj4lw"]
 [ext_resource type="Script" path="res://farm_player.gd" id="1_lyjrp"]
 [ext_resource type="Texture2D" uid="uid://b055g77h081gr" path="res://Walking down farmer-1.png.png" id="2_2wqr8"]
 [ext_resource type="Texture2D" uid="uid://ede1b6kqrkoy" path="res://Walking down farmer-2.png.png" id="3_li5ci"]
@@ -716,6 +717,8 @@ sources/0 = SubResource("TileSetAtlasSource_d4hdw")
 sources/1 = SubResource("TileSetAtlasSource_qk1wm")
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_kj4lw")
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(1273, 495)
