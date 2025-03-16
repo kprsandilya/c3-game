@@ -65,14 +65,18 @@ func _process(_delta):
 			Weather.water_level -= 20
 			print("WATER LEVEL: " + str(Weather.water_level))
 			
-			if(Weather.plant_health[0] < health_array[0]):
+			if(Weather.plant_health[0] + increment < health_array[0]):
 				Weather.plant_health[0] += increment
-			if(Weather.plant_health[1] < health_array[1]):
+			else: Weather.plant_health[0] = health_array[0]
+			if(Weather.plant_health[1] + increment < health_array[1]):
 				Weather.plant_health[1] += increment
-			if(Weather.plant_health[2] < health_array[2]):
+			else: Weather.plant_health[1] = health_array[1]
+			if(Weather.plant_health[2] + increment < health_array[2]):
 				Weather.plant_health[2] += increment
-			if(Weather.plant_health[3] < health_array[3]):
+			else: Weather.plant_health[2] = health_array[2]
+			if(Weather.plant_health[3] + increment < health_array[3]):
 				Weather.plant_health[3] += increment
+			else: Weather.plant_health[3] = health_array[3]
 				
 			for row in range(Weather.seedling_array.size()):
 				for seedling in Weather.seedling_array[row]:
@@ -159,14 +163,18 @@ func update_health():
 			Weather.plant_health[3] += increment
 	elif state == "rain":
 		increment = 10
-		if(Weather.plant_health[0] < health_array[0]):
-			Weather.plant_health[0] += 10
-		if(Weather.plant_health[1] < health_array[1]):
-			Weather.plant_health[1] += 10
-		if(Weather.plant_health[2] < health_array[2]):
-			Weather.plant_health[2] += 10
-		if(Weather.plant_health[3] < health_array[3]):
-			Weather.plant_health[3] += 10
+		if(Weather.plant_health[0] + increment < health_array[0]):
+			Weather.plant_health[0] += increment
+		else: Weather.plant_health[0] = health_array[0]
+		if(Weather.plant_health[1] + increment < health_array[1]):
+			Weather.plant_health[1] += increment
+		else: Weather.plant_health[1] = health_array[1]
+		if(Weather.plant_health[2] + increment < health_array[2]):
+			Weather.plant_health[2] += increment
+		else: Weather.plant_health[2] = health_array[2]
+		if(Weather.plant_health[3] + increment < health_array[3]):
+			Weather.plant_health[3] += increment
+		else: Weather.plant_health[3] = health_array[3]
 		Weather.water_level = min(Weather.water_level + 50, 100)
 	elif state == "drought":
 		increment = -20
