@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtuejd0652lwf"]
+[gd_scene load_steps=3 format=3 uid="uid://84vlk47vqkm"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_8nc7f"]
 
@@ -54,8 +54,14 @@ offset_bottom = 162.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 24
-text = "PLACEHOLDER"
+theme_override_font_sizes/normal_font_size = 20
+text = "In this game, you have to maintain your supply of crops over the span of a harvest cycle, lasting 32 weeks.
+
+- Walk up to the water supply and press \"E\" on your keyboard to replenish your plants' health. 
+
+- Walk up to the Farmer and Press E to learn more about farming and gain advantages.
+
+- Enter the shop at the far left side of the village to sell off your crops."
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
