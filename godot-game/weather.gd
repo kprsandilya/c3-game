@@ -61,8 +61,8 @@ var weather_probabilities = [
 	[0.2, 0, 0.4, 0.6],  # Weeks 8-11: October
 	[0.1, 0.5, 0.5, 0.0],  # Weeks 12-15: November
 	[0.3, 0.3, 0.3, 0.1],  # Weeks 16-19: December
-	[0.4, 0.2, 0.2, 0.2],  # Weeks 20-23: January
-	[0.1, 0.4, 0.4, 0.1],  # Weeks 24-27: February
+	[0.0, 0.0, 0.5, 0.5],  # Weeks 20-23: January
+	[0.2, 0.0, 0.5, 0.3],  # Weeks 24-27: February
 	[0.2, 0.2, 0.2, 0.4]   # Weeks 28-31: March
 ]
 
