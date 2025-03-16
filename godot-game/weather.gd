@@ -8,6 +8,8 @@ var plant_hidden: Array = [false, false, false, false]
 
 var flags: Array = [false, false]
 
+var sol: int = -10
+
 #Goes up to 8
 var month: int = 0
 

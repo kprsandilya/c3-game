@@ -75,6 +75,19 @@ func _process(delta):
 		
 	var collision = move_and_collide(velocity * delta)
 	
+	var tilemap = get_node("../TileMapLayer")
+	
+	if collision:
+		var collision_pos = collision.get_position()
+		var adjusted_pos = collision_pos - collision.get_normal() * 0.1
+		var tile_pos = tilemap.local_to_map(adjusted_pos)
+		var tile_id = tilemap.get_cell_atlas_coords(tile_pos)
+		
+		print(tile_id.x)
+
+		if tile_id.x == 2:
+			get_tree().change_scene_to_file("Store.tscn")
+	
 	if collision != null and Input.is_action_just_pressed("e"):
 		var name = collision.get_collider().name
 
