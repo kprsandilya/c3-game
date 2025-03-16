@@ -2,6 +2,7 @@ class_name AnimatedTextureRect extends TextureRect
 
 @export var sprites: SpriteFrames
 @export var current_animation = "default"
+@export var snow_animation = 'snow_animation'
 @export var frame_index = 0
 @export_range(0.0, INF, 0.001) var speed_scale := 1.0
 @export var auto_play := false
@@ -23,7 +24,21 @@ func _ready():
 
 func _process(delta):
 	if state == 'rain':
+		current_animation = 'default'
 		# Play the animation if the condition is met
+		if sprites == null or playing == false:
+			return
+		if not sprites.has_animation(current_animation):
+			playing = false
+			assert(false, "Animation doesn't exist")
+		get_animation_data(current_animation)
+		frame_delta += (speed_scale * delta)
+		if frame_delta >= (refresh_rate / fps):
+			texture = get_next_frame()  # Get the next frame of the animation
+			frame_delta = 0
+	elif state == 'snow':
+				# Play the animation if the condition is met
+		current_animation = snow_animation
 		if sprites == null or playing == false:
 			return
 		if not sprites.has_animation(current_animation):

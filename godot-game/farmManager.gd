@@ -5,12 +5,6 @@ extends Node2D
 @export var fava_texture = preload("res://fava_healthy.png")
 @export var quinoa_texture = preload("res://quinoa_healthy.png")
 @export var ichu_texture = preload("res://ichu_healthy.png")
-@export var water1 = preload("res://water1.png")
-@export var water2 = preload("res://water2.png")
-@export var water3 = preload("res://water3.png")
-@export var water4 = preload("res://water4.png")
-@export var water5 = preload("res://water5.png")
-@export var water6 = preload("res://water6.png")
 
 var column_spacing = 72  # Adjust for spacing
 var start_x = 58  # Adjust for alignment
@@ -54,7 +48,6 @@ func _ready():
 	print(Weather.seedling_array[3][0].get_meta("plant_health"))
 
 func _process(_delta):
-	update_tank()
 	var increment = 10
 	if near_water_tank:
 		message_label.show()
@@ -127,7 +120,6 @@ func update_health():
 
 	if state == "rain":
 		increment = 10
-		Weather.water_level = min(Weather.water_level + 50, 100)
 	elif state == "drought":
 		increment = -20
 	elif state == "snow":
@@ -158,18 +150,3 @@ func update_health():
 					seedling.queue_free()  # Remove dead seedlings
 
 		Weather.seedling_array[row] = new_row  # Update row with only surviving seedlings
-
-func update_tank():
-	var sprite = get_node("water_tank/Sprite2D")
-	if Weather.water_level  == 100:
-		sprite.texture = water1
-	elif Weather.water_level  >= 80:
-		sprite.texture = water2
-	elif Weather.water_level  >= 60:
-		sprite.texture = water3
-	elif Weather.water_level  >= 40:
-		sprite.texture = water4
-	elif Weather.water_level  >= 20:
-		sprite.texture = water5
-	elif Weather.water_level  == 0:
-		sprite.texture = water6
