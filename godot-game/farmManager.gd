@@ -5,6 +5,12 @@ extends Node2D
 @export var fava_texture = preload("res://fava_healthy.png")
 @export var quinoa_texture = preload("res://quinoa_healthy.png")
 @export var ichu_texture = preload("res://ichu_healthy.png")
+@export var water1 = preload("res://water1.png")
+@export var water2 = preload("res://water2.png")
+@export var water3 = preload("res://water3.png")
+@export var water4 = preload("res://water4.png")
+@export var water5 = preload("res://water5.png")
+@export var water6 = preload("res://water6.png")
 
 var column_spacing = 72  # Adjust for spacing
 var start_x = 58  # Adjust for alignment
@@ -49,6 +55,7 @@ func _ready():
 
 func _process(_delta):
 	var increment = 10
+	update_tank()
 	if near_water_tank:
 		message_label.show()
 		if Input.is_action_just_pressed("e") and Weather.water_level > 0:
@@ -59,6 +66,9 @@ func _process(_delta):
 				for seedling in Weather.seedling_array[row]:
 					var new_health = min(seedling.get_meta("plant_health") + increment, health_array[row])
 					seedling.set_meta("plant_health", new_health)
+					
+					var health_label = seedling.get_node("health")
+					health_label.text = str(new_health)
 
 				if Weather.seedling_array[row]:
 					print("HEALTH: " + str(Weather.seedling_array[row][0].get_meta("plant_health")))
@@ -86,6 +96,12 @@ func place_seedlings():
 
 			seedling.set_meta("plant_type", type_array[row])
 			seedling.set_meta("plant_health", health_array[row])
+			
+			var health_label = seedling.get_node("health")
+			health_label.text = str(health_array[row])
+			health_label.set("theme_override_colors/font_color", Color.WHITE) # Make text white
+			health_label.set("theme_override_font_sizes/font_size", 16)
+			
 			add_child(seedling)
 			row_array.append(seedling)
 
@@ -120,6 +136,7 @@ func update_health():
 
 	if state == "rain":
 		increment = 10
+		Weather.water_level = min(Weather.water_level + 50, 100)
 	elif state == "drought":
 		increment = -20
 	elif state == "snow":
@@ -142,11 +159,31 @@ func update_health():
 				elif row == 3:
 					new_health = clamp(new_health, 0, Weather.plant_health[3])
 				
+				seedling.set_meta("plant_health", new_health)
+				var health_label = seedling.get_node("health")
+				health_label.text = str(new_health)
+				
 
 				if new_health > 0:
-					seedling.set_meta("plant_health", new_health)
 					new_row.append(seedling)  # Keep alive seedlings
 				else:
 					seedling.queue_free()  # Remove dead seedlings
 
 		Weather.seedling_array[row] = new_row  # Update row with only surviving seedlings
+		
+func update_tank():
+	var sprite = get_node("water_tank/Sprite2D")
+	if Weather.water_level  == 100:
+		sprite.texture = water1
+	elif Weather.water_level  >= 80:
+		sprite.texture = water2
+	elif Weather.water_level  >= 60:
+		sprite.texture = water3
+	elif Weather.water_level  >= 40:
+		sprite.texture = water4
+	elif Weather.water_level  >= 20:
+		sprite.texture = water5
+	elif Weather.water_level  == 0:
+		sprite.texture = water6
+
+	
