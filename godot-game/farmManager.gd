@@ -13,6 +13,7 @@ extends Node2D
 @export var water6 = preload("res://water6.png")
 @export var music1 = preload("res://music/contry.mp3")
 @export var music2 = preload("res://music/spring.mp3")
+@onready var week_label = get_node("week")
 
 var column_spacing = 72  # Adjust for spacing
 var start_x = 58  # Adjust for alignment
@@ -55,6 +56,8 @@ func _ready():
 	print(Weather.plant_health[1])
 	print(Weather.plant_health[2])
 	print(Weather.plant_health[3])
+	
+	update_week_label()
 
 func _process(_delta):
 	var increment = 10
@@ -91,6 +94,7 @@ func _process(_delta):
 					print("HEALTH: " + str(Weather.seedling_array[row][0].get_meta("plant_health")))
 	else:
 		message_label.hide()
+	update_week_label()
 
 func place_seedlings():
 	# Clear existing seedlings (for re-generation)
@@ -259,3 +263,6 @@ func play_music():
 	else:
 		$AudioStreamPlayer.stream = music1
 	$AudioStreamPlayer.play()  # 
+
+func update_week_label():
+	week_label.text = "Week: " + str(Weather.week + 1)

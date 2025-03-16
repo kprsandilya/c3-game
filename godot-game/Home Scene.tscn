@@ -974,6 +974,14 @@ stream = ExtResource("21_1yk6c")
 autoplay = true
 parameters/looping = true
 
+[node name="week" type="Label" parent="."]
+offset_left = 18.0
+offset_top = 589.0
+offset_right = 61.0
+offset_bottom = 612.0
+scale = Vector2(1.81246, 2.05641)
+text = "Week"
+
 [connection signal="screen_exited" from="player/visibility" to="player" method="_on_visibility_screen_exited"]
 [connection signal="body_entered" from="water_tank" to="." method="_on_WaterTank_area_entered"]
 [connection signal="body_exited" from="water_tank" to="." method="_on_WaterTank_area_exited"]
