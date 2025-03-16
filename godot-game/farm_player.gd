@@ -7,6 +7,7 @@ signal hit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	get_node("../water_tank/water").hide()
 	
 	#hide()
 
@@ -37,8 +38,27 @@ func _process(delta):
 			$sprite.animation = "up"
 		else:
 			$sprite.animation = "down"
-		
+
 	var collision = move_and_collide(velocity * delta)
+	#var tilemap = get_node("../TileMapLayer")
+	#if collision:
+		#var collision_pos = collision.get_position()
+		#var adjusted_pos = collision_pos - collision.get_normal() * 0.1
+		#var tile_pos = tilemap.local_to_map(adjusted_pos)
+		#var tile_id = tilemap.get_cell_atlas_coords(tile_pos)
+		#if tile_id.x == 24:
+			#get_node("../water_tank/water").show()
+			#if Input.is_action_just_pressed("e"):
+				#get_node("../water_tank/water").hide()
+		#else:
+			#get_node("../water_tank/water").hide()
+	#else:
+		#get_node("../water_tank/water").hide()
+		
+		
+	
+	
+	
 
 
 
