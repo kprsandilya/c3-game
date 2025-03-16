@@ -9,8 +9,10 @@ var plant_health: Array = [70, 60, 50, 40]
 var plant_hidden: Array = [false, false, false, false]
 
 var week_states = ["rain", "snow", "clear", "drought"]
-var max_weeks = 40
-var week_array = []
+# var max_weeks = 40
+var max_weeks = 32
+# var week_array = []
+var week_array = [2, 2, 1, 0, 2, 3, 0, 0, 2, 2, 3, 2, 0, 0, 0, 2, 2, 2, 0, 2, 2, 3, 3, 2, 2, 2, 0, 2, 0, 2, 0, 0]
 
 var bought = [0,0,0,0]
 
@@ -45,8 +47,8 @@ var week_changed = false
 #Used ChatGPT to help generate function, Prompt: How can I generate seedlings
 #on generation in an efficient manner.
 func _init():
-	for week in range(0, max_weeks):
-		week_array.append(randi_range(0, 3))
+	#for week in range(0, max_weeks):
+	#	week_array.append(randi_range(0, 3))
 		
 	for row in range(0,4):
 		var row_array = []
