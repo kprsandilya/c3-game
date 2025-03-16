@@ -132,15 +132,19 @@ func _on_WaterTank_area_exited(_area):
 	message_label.hide()  # Show message when player is near the water tank
 	
 func update_health():
-	var increment = -10
-
-	if state == "rain":
+	var increment = 0
+	
+	if state == "clear":
+		increment = -10
+	elif state == "rain":
 		increment = 10
 		Weather.water_level = min(Weather.water_level + 50, 100)
 	elif state == "drought":
 		increment = -20
 	elif state == "snow":
-		increment = 0
+		increment = -5
+	print("Weather State:", state, " | Increment:", increment)
+
 
 	for row in range(Weather.seedling_array.size()):
 		var new_row = []  # Store only seedlings that survive
@@ -149,6 +153,7 @@ func update_health():
 			# Check if seedling is still a valid node
 			if seedling != null and seedling.is_inside_tree():
 				var new_health = seedling.get_meta("plant_health") + increment
+				
 				
 				if row == 0:
 					new_health = clamp(new_health, 0, Weather.plant_health[0])

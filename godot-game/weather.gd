@@ -11,8 +11,8 @@ var plant_hidden: Array = [false, false, false, false]
 var week_states = ["rain", "snow", "clear", "drought"]
 # var max_weeks = 40
 var max_weeks = 32
-# var week_array = []
-var week_array = [2, 2, 1, 0, 2, 3, 0, 0, 2, 2, 3, 2, 0, 0, 0, 2, 2, 2, 0, 2, 2, 3, 3, 2, 2, 2, 0, 2, 0, 2, 0, 0]
+var week_array = []
+# var week_array = [2, 2, 1, 0, 2, 3, 0, 0, 2, 2, 3, 2, 0, 0, 0, 2, 2, 2, 0, 2, 2, 3, 3, 2, 2, 2, 0, 2, 0, 2, 0, 0]
 
 var bought = [0,0,0,0]
 
@@ -43,12 +43,61 @@ var health_array = [70, 60, 50, 40]
 
 var week_changed = false
 
+var weeks_without_rain = 0
+
+# Used ChatGPT to ask for help on how to create weighted probabilities.
+# Prompt: I'm writing Godot code where I have 32 weeks and 4 weather conditions.
+# I want to assign weather conditions randomly depending on which set of 4 week
+# it is, for example, I want to give weeks 0-3 a 20% chance of weather condition 0,
+# a 20% chance of weather condition 1, 60% chance of weather condition 2, and a 0%
+# chance of weather condition 3. How would I implement this?
+
+var weather_probabilities = [
+	# Rain, Snow, Clear, Drought
+	[0.2, 0.2, 0.6, 0.0],  # Weeks 0-3: August
+	[0.2, 0.2, 0.4, 0.2],  # Weeks 4-7: September
+	[0.2, 0, 0.4, 0.6],  # Weeks 8-11: October
+	[0.1, 0.5, 0.5, 0.0],  # Weeks 12-15: November
+	[0.3, 0.3, 0.3, 0.1],  # Weeks 16-19: December
+	[0.4, 0.2, 0.2, 0.2],  # Weeks 20-23: January
+	[0.1, 0.4, 0.4, 0.1],  # Weeks 24-27: February
+	[0.2, 0.2, 0.2, 0.4]   # Weeks 28-31: March
+]
+
+func get_weighted_random(weights: Array) -> int:
+	var rand_value = randf()
+	var cumulative = 0.0
+	for i in range(len(weights)):
+		cumulative += weights[i]
+		if rand_value < cumulative:
+			return i
+	return 4 - 1  # Fallback (should not occur if weights sum to 1)
+
 # Initialize the resource with given data
 #Used ChatGPT to help generate function, Prompt: How can I generate seedlings
 #on generation in an efficient manner.
 func _init():
-	#for week in range(0, max_weeks):
-	#	week_array.append(randi_range(0, 3))
+	for week in range(0, max_weeks):
+		# Integer Division to select which week it's in
+		var week_set = floor(week / 4)
+
+		# Gets the probability of the week
+		var random_weather = get_weighted_random(weather_probabilities[week_set])
+		
+		# Don't want the game to be unwinnable, so force rain if needed
+		if(weeks_without_rain >= 8):
+			random_weather = 0
+		
+		# Increment or reset weeks without rain
+		if(random_weather == 0):
+			weeks_without_rain = 0
+		else:
+				weeks_without_rain += 1
+
+		# Appends the chosen weather
+		week_array.append(random_weather)
+
+		print("Week %d -> Weather %d" % [week, random_weather])
 		
 	for row in range(0,4):
 		var row_array = []
