@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cdrtq37isbgq4"]
+[gd_scene load_steps=27 format=4 uid="uid://cdrtq37isbgq4"]
 
 [ext_resource type="Script" path="res://farmManager.gd" id="1_kj4lw"]
 [ext_resource type="Script" path="res://farm_player.gd" id="1_lyjrp"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://d4c3kxyowre03" path="res://Walking up farmer-4.png.png" id="9_daudl"]
 [ext_resource type="Texture2D" uid="uid://61ssuhjkasu5" path="res://empty.png" id="9_o2fdn"]
 [ext_resource type="Texture2D" uid="uid://bha84w8s0ihq7" path="res://pngtree-essential-features-to-consider-when-selecting-a-water-tank-for-your-png-image_13492880.png" id="19_mewjs"]
-[ext_resource type="Script" path="res://water_tank.gd" id="20_k5als"]
 [ext_resource type="AudioStream" uid="uid://bq5qf5mtlxho6" path="res://music/contry.mp3" id="21_1yk6c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_krfgp"]
@@ -764,14 +763,13 @@ tile_set = SubResource("TileSet_l3lds")
 z_index = -1
 position = Vector2(112, 183)
 scale = Vector2(0.561111, 0.672222)
-script = ExtResource("20_k5als")
 
 [node name="Sprite2D" type="Sprite2D" parent="water_tank"]
 position = Vector2(0, -3.05176e-05)
 texture = ExtResource("19_mewjs")
 
 [node name="water" type="Label" parent="water_tank"]
-visible = false
+z_index = 5
 offset_left = 584.554
 offset_top = -142.81
 offset_right = 712.554
@@ -789,5 +787,5 @@ autoplay = true
 parameters/looping = true
 
 [connection signal="screen_exited" from="player/visibility" to="player" method="_on_visibility_screen_exited"]
-[connection signal="body_entered" from="water_tank" to="water_tank" method="_on_body_entered"]
-[connection signal="body_exited" from="water_tank" to="water_tank" method="_on_body_exited"]
+[connection signal="body_entered" from="water_tank" to="." method="_on_WaterTank_area_entered"]
+[connection signal="body_exited" from="water_tank" to="." method="_on_WaterTank_area_exited"]

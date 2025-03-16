@@ -6,62 +6,92 @@ extends Node2D
 @export var quinoa_texture = preload("res://quinoa_healthy.png")
 @export var ichu_texture = preload("res://ichu_healthy.png")
 
-
-# Number of columns
-var column_count = Weather.plant_array
 var column_spacing = 72  # Adjust for spacing
-var start_x = 58  # Adjust for horizontal alignment
-var type
+var start_x = 58  # Adjust for alignment
 
 var health_array = [70, 60, 50, 40]
 
-# Manually set Y-coordinates for each row based on grassy positions
-var row_y_positions = [250, 350, 450, 550]  # Adjust these based on your image
-var seedling_array = Weather.seedling_array
-var seedling_types = []
-var type_array = [0, 1, 2, 3]
+@onready var message_label = get_node("water_tank/water")
+@onready var water_tank_area = get_node("water_tank/CollisionShape2D")
+
+var near_water_tank = false
+var row_y_positions = [250, 350, 450, 550]  # Y-coordinates for rows
+var type_array = [0, 1, 2, 3]  # Plant types
 
 func _ready():
+	if Weather.week == Weather.max_weeks:
+		get_tree().change_scene_to_file("res://Store.tscn")
 	$AudioStreamPlayer.play()
-	#place_seedlings()
+	place_seedlings()
 	change_texture()
+
 	if Weather.week_changed:
 		update_health()
 		Weather.week_changed = false
-	#for row in seedling_array:
-		#for seedling in row:
-#
-			#var plant_type = seedling.get_meta("plant_health")
-			#print(seedling)  # Get stored plant type
-	
 
-#Used ChatGPT to help generate function, Prompt: How can I generate seedlings
-#on generation in an efficient manner.
+	if message_label:
+		message_label.hide()  # Hide message at start
+
+	await get_tree().create_timer(0.1).timeout
+	near_water_tank = false
+	
+	print("WATER LEVEL: " + str(Weather.water_level))
+	print(Weather.seedling_array[0][0].get_meta("plant_health"))
+	print(Weather.seedling_array[1][0].get_meta("plant_health"))
+	print(Weather.seedling_array[2][0].get_meta("plant_health"))
+	print(Weather.seedling_array[3][0].get_meta("plant_health"))
+
+func _process(_delta):
+	var increment = 10
+	if near_water_tank:
+		message_label.show()
+		if Input.is_action_just_pressed("e") and Weather.water_level > 0:
+			Weather.water_level -= 20
+			print("WATER LEVEL: " + str(Weather.water_level))
+			
+			for row in range(Weather.seedling_array.size()):
+				for seedling in Weather.seedling_array[row]:
+					var new_health = min(seedling.get_meta("plant_health") + increment, health_array[row])
+					seedling.set_meta("plant_health", new_health)
+
+				if Weather.seedling_array[row]:
+					print("HEALTH: " + str(Weather.seedling_array[row][0].get_meta("plant_health")))
+	else:
+		message_label.hide()
+
 func place_seedlings():
-	#var row_array= []
+	# Clear existing seedlings (for re-generation)
+	for row in Weather.seedling_array:
+		for seedling in row:
+			if seedling != null and seedling.is_inside_tree():
+				seedling.queue_free()  # Only call queue_free on valid nodes
+	Weather.seedling_array.clear()
+
+	# Now add new seedlings
 	for row in range(row_y_positions.size()):
 		var row_array = []
-		for col in range(column_count[row]):
+		var column_count = Weather.plant_array[row]
+
+		for col in range(column_count):
 			var seedling = seedling_scene.instantiate()
 			var x_pos = start_x + col * column_spacing
-			var y_pos = row_y_positions[row]  # Use manual Y-coordinate
+			var y_pos = row_y_positions[row]
 			seedling.position = Vector2(x_pos, y_pos)
-			
+
 			seedling.set_meta("plant_type", type_array[row])
 			seedling.set_meta("plant_health", health_array[row])
 			add_child(seedling)
 			row_array.append(seedling)
-			
-		seedling_array.append(row_array)
+
+		Weather.seedling_array.append(row_array)
 
 func change_texture():
-	for row in seedling_array:
-		for seedling in row:
-			var sprite = seedling.get_node("seedsprite")
-			var plant_type = seedling.get_meta("plant_type")  # Get stored plant type
+	for row in range(Weather.seedling_array.size()):
+		for seedling in range(Weather.seedling_array[row].size()):  # FIXED LOOP
+			var sprite = Weather.seedling_array[row][seedling].get_node("seedsprite")
+			var plant_type = Weather.seedling_array[row][seedling].get_meta("plant_type")
 
 			if Weather.week > 1:
-				# Set texture based on the stored plant type
 				if plant_type == 0:
 					sprite.texture = potato_texture
 				elif plant_type == 1:
@@ -71,17 +101,44 @@ func change_texture():
 				elif plant_type == 3:
 					sprite.texture = ichu_texture
 
+func _on_WaterTank_area_entered(_area):
+	near_water_tank = true
+
+func _on_WaterTank_area_exited(_area):
+	near_water_tank = false
 func update_health():
 	var state = Weather.week_states[Weather.week_array[Weather.week]]
-	var increment = -10;
+	var increment = -10
+
 	if state == "rain":
-		increment = 10;
+		increment = 10
 	elif state == "drought":
 		increment = -20
 	elif state == "snow":
 		increment = 0
-	for row in seedling_array:
-		for seedling in row:
-			seedling.set_meta("plant_health", seedling.get_meta("plant_health")  + increment)
-			print(seedling.get_meta("plant_health"))
-		
+
+	for row in range(Weather.seedling_array.size()):
+		var new_row = []  # Store only seedlings that survive
+
+		for seedling in Weather.seedling_array[row]:
+			# Check if seedling is still a valid node
+			if seedling != null and seedling.is_inside_tree():
+				var new_health = seedling.get_meta("plant_health") + increment
+				
+				if row == 0:
+					new_health = clamp(new_health, 0, Weather.plant_health[0])
+				elif row == 1:
+					new_health = clamp(new_health, 0, Weather.plant_health[1])
+				elif row == 2:
+					new_health = clamp(new_health, 0, Weather.plant_health[2])
+				elif row == 3:
+					new_health = clamp(new_health, 0, Weather.plant_health[3])
+				
+
+				if new_health > 0:
+					seedling.set_meta("plant_health", new_health)
+					new_row.append(seedling)  # Keep alive seedlings
+				else:
+					seedling.queue_free()  # Remove dead seedlings
+
+		Weather.seedling_array[row] = new_row  # Update row with only surviving seedlings

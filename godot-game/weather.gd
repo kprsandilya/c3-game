@@ -47,7 +47,6 @@ var week_changed = false
 func _init():
 	for week in range(0, max_weeks):
 		week_array.append(randi_range(0, 3))
-		print(week_array[week])
 		
 	for row in range(0,4):
 		var row_array = []
@@ -63,6 +62,21 @@ func _init():
 			row_array.append(seedling)
 			
 		seedling_array.append(row_array)
+		
+func update_seedlings():
+	var i = 0
+	for row in range(0, seedling_array.size()):
+		var new_row = []  # Store only seedlings that survive
+
+		for seedling in range(0, plant_array[i]):
+			# Check for valid seedling references before adding
+			if seedling_array[row][seedling] != null and seedling_array[row][seedling].is_inside_tree():
+				new_row.append(seedling_array[row][seedling])  # Keep alive seedlings
+
+		seedling_array[i] = new_row  # Update row with only surviving seedlings
+		i += 1
+
+		
 
 # Print player properties
 func Print() -> void:

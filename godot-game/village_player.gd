@@ -251,6 +251,8 @@ func _set_option() -> void:
 	itotal += 1
 	
 	options.visible = false
+	
+	Weather.update_seedlings()
 		
 func _set_option2() -> void:
 	Weather.Print()
@@ -268,6 +270,8 @@ func _set_option2() -> void:
 	jtotal += 1
 	
 	options2.visible = false
+	
+	Weather.update_seedlings()
 		
 func _option2_potato_pressed() -> void:
 	if (Weather.bought[0] > 0):

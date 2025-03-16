@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b758qoumnpsjq"]
+[gd_scene load_steps=3 format=3 uid="uid://c718pxlw8q2oj"]
 
 [ext_resource type="Script" path="res://seedling.gd" id="1_qosmb"]
 [ext_resource type="Texture2D" uid="uid://bf30ctnrxuoc2" path="res://seedling_healthy.png" id="1_vkb5k"]
