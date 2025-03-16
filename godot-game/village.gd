@@ -22,3 +22,8 @@ func _process(delta: float) -> void:
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 	get_tree().change_scene_to_file("res://Home Scene.tscn")
+
+
+func _on_week_pressed() -> void:
+	Weather.week += 1
+	get_tree().change_scene_to_file("res://Home Scene.tscn")

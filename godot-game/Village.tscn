@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://q1mww70eu4ri"]
+[gd_scene load_steps=27 format=4 uid="uid://q1mww70eu4ri"]
 
 [ext_resource type="Script" path="res://village_player.gd" id="1_d7o40"]
 [ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
@@ -17,7 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://djau0n7ii5dxc" path="res://Walking farmer-3.png (1).png" id="15_w48lo"]
 [ext_resource type="Texture2D" uid="uid://daoeoo60sgtw3" path="res://Walking farmer-4.png (1).png" id="16_suube"]
 [ext_resource type="PackedScene" uid="uid://c5ysfevjradsp" path="res://old_man.tscn" id="17_uejo6"]
+[ext_resource type="Texture2D" uid="uid://bijsjsvkyuo44" path="res://Farmer2PlayerTextbox.png" id="18_jltr5"]
 [ext_resource type="Texture2D" uid="uid://m1k1aim1iy5w" path="res://OldMan2PlayerTextbox.png" id="18_st7q8"]
+[ext_resource type="PackedScene" uid="uid://6xime4un6n1q" path="res://luigi.tscn" id="19_h2miy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cuvet"]
 texture = ExtResource("7_hdfpe")
@@ -99,9 +101,6 @@ animations = [{
 radius = 28.0
 height = 70.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ogls6"]
-texture = ExtResource("18_st7q8")
-
 [sub_resource type="GDScript" id="GDScript_3ins6"]
 script/source = "extends Button
 
@@ -175,7 +174,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ogls6")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_st7q8")
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
@@ -188,14 +195,161 @@ script = SubResource("GDScript_3ins6")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 231.0
+offset_left = 263.0
 offset_top = 495.0
-offset_right = 833.0
-offset_bottom = 592.0
+offset_right = 831.0
+offset_bottom = 595.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[font_size=24]Hello![/font_size]"
 
+[node name="HBo" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 530.0
+offset_right = 652.0
+offset_bottom = 601.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/HBo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control/HBo/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Potato"
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control/HBo/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Fava"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/HBo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button4" type="Button" parent="CanvasLayer/Control/HBo/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "quinoa"
+
+[node name="Button5" type="Button" parent="CanvasLayer/Control/HBo/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "ichu"
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+z_index = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control2"]
+visible = false
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_jltr5")
+
+[node name="Button" type="Button" parent="CanvasLayer/Control2"]
+z_index = 5
+layout_mode = 0
+offset_left = 845.0
+offset_top = 575.0
+offset_right = 926.0
+offset_bottom = 605.0
+text = "NEXT"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control2"]
+z_index = 5
+layout_mode = 0
+offset_left = 263.0
+offset_top = 495.0
+offset_right = 831.0
+offset_bottom = 595.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[font_size=24]Hello![/font_size]"
+
+[node name="HBo" type="HBoxContainer" parent="CanvasLayer/Control2"]
+z_index = 5
+layout_mode = 0
+offset_left = 332.0
+offset_top = 530.0
+offset_right = 652.0
+offset_bottom = 601.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control2/HBo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="CanvasLayer/Control2/HBo/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "potato"
+
+[node name="Button3" type="Button" parent="CanvasLayer/Control2/HBo/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "fava"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control2/HBo"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button4" type="Button" parent="CanvasLayer/Control2/HBo/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "quinoa"
+
+[node name="Button5" type="Button" parent="CanvasLayer/Control2/HBo/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "ichu"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -124.0
+offset_top = -40.0
+offset_right = -9.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "NEXT WEEK"
+
+[node name="OldMan2" parent="." instance=ExtResource("19_h2miy")]
+position = Vector2(204, 404)
+
 [connection signal="screen_exited" from="player2/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="player2" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBo/VBoxContainer/Button2" to="player2" method="_option_potato_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBo/VBoxContainer/Button3" to="player2" method="_option_fava_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBo/VBoxContainer2/Button4" to="player2" method="_option_quinoa_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/HBo/VBoxContainer2/Button5" to="player2" method="_option_ichu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/Button" to="player2" method="_on_button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/HBo/VBoxContainer/Button2" to="player2" method="_option2_potato_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/HBo/VBoxContainer/Button3" to="player2" method="_option2_fava_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/HBo/VBoxContainer2/Button4" to="player2" method="_option2_quinoa_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control2/HBo/VBoxContainer2/Button5" to="player2" method="_option2_ichu_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_week_pressed"]

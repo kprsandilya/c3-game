@@ -3,15 +3,47 @@ extends CharacterBody2D
 var screen_size
 signal hit 
 
+var itotal = 0
 var i = 0
+var iyou = 0
+
+var jtotal = 0
+var j = 0
+var jyou = 0
+@onready var con = get_tree().get_root().find_child("Control", true, false)
+@onready var luigi = get_tree().get_root().find_child("Control2", true, false)
+@onready var options = get_node("../CanvasLayer/Control/HBo")
+@onready var options2 = get_node("../CanvasLayer/Control2/HBo")
+
+@onready var you = preload("res://Player2OldManTextbox.png")
+@onready var them = preload("res://OldMan2PlayerTextbox.png")
+
+@onready var farmyou = preload("res://Player2FarmerTextbox.png")
+@onready var farmthem = preload("res://Farmer2PlayerTextbox.png")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
 	con.hide()
+	luigi.hide()
+	options.visible = false
+	options2.visible = false
 	#hide()
+	
+func set_zero():
+	itotal = 0
+	i = 0
+	iyou = 0
 
-@onready var con = get_tree().get_root().find_child("Control", true, false)
+	jtotal = 0
+	j = 0
+	jyou = 0
+	
+	get_node("../CanvasLayer/Control/RichTextLabel").text = "HELLO!"
+	get_node("../CanvasLayer/Control2/RichTextLabel").text = "HELLO!"
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,6 +97,25 @@ func _process(delta):
 				print("Panel toggled:", con.visible)
 			else:
 				print("Error: Control node not found!")
+		elif name == "Luigi":
+			
+			if luigi:
+				luigi.visible = not luigi.visible
+				luigi.queue_redraw()
+				luigi.set_z_index(100)  # Bring to front
+				luigi.size = get_viewport_rect().size
+				luigi.custom_minimum_size = get_viewport_rect().size
+
+				if luigi.visible:
+					velocity = Vector2.ZERO
+					$sprite.stop()
+					set_process(false)  # Disable movement
+				else:
+					set_process(true)  # Re-enable movement
+
+				print("Panel toggled:", luigi.visible)
+			else:
+				print("Error: Control node not found!")
 
 
 
@@ -76,14 +127,168 @@ func _on_button_pressed() -> void:
 	var file = FileAccess.open("res://temp.txt", FileAccess.READ)
 	var content = file.get_as_text().split('\n')
 	
-	print(self)
-	var text = get_node("../CanvasLayer/Control/RichTextLabel")
+	var file2 = FileAccess.open("res://tempyou.txt", FileAccess.READ)
+	var contentyou = file2.get_as_text().split('\n')
 	
-	if (i >= content.size()):
-		con.visible = false
-		set_process(true)
-		return
+	var text = get_node("../CanvasLayer/Control/RichTextLabel")
+	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
+	
+	if (iyou == 0):
+		options.visible = true
+	else:
+		options.visible = false
 		
 	
-	text.text = content[i]
+	if (fmod(itotal, 2) == 1):
+		bg.texture = them
+		if (i >= content.size()):
+			con.visible = false
+			set_process(true)
+			set_zero()
+			return
+			
+		text.text = content[i]
+		i += 1
+	else:
+		bg.texture = you
+		if (iyou >= contentyou.size()):
+			con.visible = false
+			set_process(true)
+			set_zero()
+			return
+		text.text = contentyou[iyou]
+		iyou += 1
+		
+		
+	itotal += 1
+
+
+func _on_button2_pressed() -> void:
+	var file = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var content = file.get_as_text().split('\n')
+	
+	var file2 = FileAccess.open("res://tempyou.txt", FileAccess.READ)
+	var contentyou = file2.get_as_text().split('\n')
+	
+	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
+	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
+	
+	print(contentyou)
+	
+	if (true):
+		
+		if (jyou == 0):
+			options2.visible = true
+		else:
+			options2.visible = false
+	
+		if (fmod(jtotal, 2) == 1):
+			bg.texture = farmthem
+			if (j >= content.size()):
+				luigi.visible = false
+				set_process(true)
+				set_zero()
+				return
+				
+			text.text = content[j]
+			j += 1
+		else:
+			bg.texture = farmyou
+			if (jyou >= contentyou.size()):
+				luigi.visible = false
+				set_process(true)
+				set_zero()
+				return
+			text.text = contentyou[jyou]
+			jyou += 1
+			
+		jtotal += 1
+	else:
+		if (fmod(jtotal, 2) == 1):
+			bg.texture = farmthem
+			if (j >= content.size()):
+				luigi.visible = false
+				set_process(true)
+				set_zero()
+				return
+				
+			text.text = content[j]
+			j += 1
+		else:
+			bg.texture = farmyou
+			if (jyou >= contentyou.size()):
+				luigi.visible = false
+				set_process(true)
+				set_zero()
+				return
+			text.text = contentyou[jyou]
+			jyou += 1
+			
+		jtotal += 1
+
+func _set_option() -> void:
+	Weather.Print()
+	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var contentyou = file2.get_as_text().split('\n')
+
+	var text = get_node("../CanvasLayer/Control/RichTextLabel")
+
+	text.text = contentyou[i]
+	
 	i += 1
+	itotal += 1
+	
+	options.visible = false
+		
+func _set_option2() -> void:
+	Weather.Print()
+	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var contentyou = file2.get_as_text().split('\n')
+
+	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
+
+	text.text = contentyou[j]
+	
+	j += 1
+	jtotal += 1
+	
+	options2.visible = false
+		
+func _option2_potato_pressed() -> void:
+	Weather.plant_array[0] -= 1
+
+	_set_option2()
+
+
+func _option2_fava_pressed() -> void:
+	Weather.plant_array[1] -= 1
+	
+	_set_option2()
+
+func _option2_quinoa_pressed() -> void:
+	Weather.plant_array[2] -= 1
+	_set_option2()
+
+
+func _option2_ichu_pressed() -> void:
+	Weather.plant_array[3] -= 1
+	_set_option2()
+
+
+func _option_potato_pressed() -> void:
+	Weather.plant_array[0] -= 1
+	_set_option()
+
+
+func _option_fava_pressed() -> void:
+	Weather.plant_array[1] -= 1
+	_set_option()
+
+func _option_quinoa_pressed() -> void:
+	Weather.plant_array[2] -= 1
+	_set_option()
+
+
+func _option_ichu_pressed() -> void:
+	Weather.plant_array[3] -= 1
+	_set_option()
