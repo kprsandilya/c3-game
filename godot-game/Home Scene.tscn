@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://61ssuhjkasu5" path="res://empty.png" id="9_o2fdn"]
 [ext_resource type="Script" path="res://AnimatedTextureRect.gd" id="16_imwb5"]
 [ext_resource type="Texture2D" uid="uid://dc5npfdyxj5lc" path="res://Rain.png" id="17_b47gd"]
-[ext_resource type="Texture2D" uid="uid://bha84w8s0ihq7" path="res://pngtree-essential-features-to-consider-when-selecting-a-water-tank-for-your-png-image_13492880.png" id="19_mewjs"]
+[ext_resource type="Texture2D" uid="uid://ts0q6i7afw01" path="res://water1.png" id="20_e4q4q"]
 [ext_resource type="AudioStream" uid="uid://bq5qf5mtlxho6" path="res://music/contry.mp3" id="21_1yk6c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_krfgp"]
@@ -814,7 +814,7 @@ sources/0 = SubResource("TileSetAtlasSource_d4hdw")
 sources/1 = SubResource("TileSetAtlasSource_qk1wm")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7yp5i"]
-size = Vector2(171.089, 249.917)
+size = Vector2(153.267, 217.19)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(0, 1)
@@ -861,8 +861,9 @@ position = Vector2(112, 183)
 scale = Vector2(0.561111, 0.672222)
 
 [node name="Sprite2D" type="Sprite2D" parent="water_tank"]
-position = Vector2(0, -3.05176e-05)
-texture = ExtResource("19_mewjs")
+position = Vector2(-10.6931, 37.1901)
+scale = Vector2(3.50866, 3.44008)
+texture = ExtResource("20_e4q4q")
 
 [node name="water" type="Label" parent="water_tank"]
 z_index = 5
@@ -874,7 +875,7 @@ scale = Vector2(4.09725, 3.75526)
 text = "Press E to water"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="water_tank"]
-position = Vector2(0, -2.71797e-05)
+position = Vector2(-8.91086, 35.7026)
 shape = SubResource("RectangleShape2D_7yp5i")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
