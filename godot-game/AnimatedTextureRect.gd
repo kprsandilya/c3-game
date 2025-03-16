@@ -1,3 +1,4 @@
+# Pulled from the video that was listed in the doc about animated backgrounds
 class_name AnimatedTextureRect extends TextureRect
 
 @export var sprites: SpriteFrames

@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtuejd0652lwf"]
+
+[ext_resource type="Script" path="res://tutorial.gd" id="1_8nc7f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxiin"]
+bg_color = Color(0.609674, 0.547944, 0.846938, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8nc7f")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vxiin")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -274.0
+offset_right = 96.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 48
+text = "Tutorial"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -293.5
+offset_top = -162.5
+offset_right = 293.5
+offset_bottom = 162.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "PLACEHOLDER"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 509.0
+offset_right = 1138.0
+offset_bottom = 635.0
+theme_override_font_sizes/font_size = 36
+text = "START"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
