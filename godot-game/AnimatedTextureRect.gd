@@ -13,6 +13,7 @@ var frame_delta = 0
 
 # Store a preloaded static texture
 var static_texture : Texture = load("res://assets/farmBackground.png")
+var drought : Texture = load("res://Drought (1).png")
 
 var state = Weather.week_states[Weather.week_array[Weather.week]]
 
@@ -49,6 +50,8 @@ func _process(delta):
 		if frame_delta >= (refresh_rate / fps):
 			texture = get_next_frame()  # Get the next frame of the animation
 			frame_delta = 0
+	elif state == 'drought':
+		texture = drought
 	else:
 		# Use the preloaded static texture when condition is not met
 		texture = static_texture

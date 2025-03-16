@@ -141,13 +141,14 @@ func _on_button_pressed() -> void:
 	
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
-	
-	if (iyou == 0):
-		options.visible = true
-	else:
-		options.visible = false
 		
 	if (true):
+		print(itotal)
+		
+		if (itotal == 4):
+			options.visible = true
+		else:
+			options.visible = false
 	
 		if (itotal < 4 or itotal > 4):
 			bg.texture = them
@@ -167,10 +168,11 @@ func _on_button_pressed() -> void:
 				set_zero()
 				return
 		elif itotal > 5:
+			con.visible = false
+			set_zero()
+			set_process(true)
 			return
 			
-			
-		itotal += 1
 	else:
 		if (itotal < 1 or itotal > 1):
 			bg.texture = them
@@ -191,7 +193,7 @@ func _on_button_pressed() -> void:
 				return
 			
 			
-		itotal += 1
+	itotal += 1
 
 
 func _on_button2_pressed() -> void:
