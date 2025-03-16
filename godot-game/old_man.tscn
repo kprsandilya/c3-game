@@ -9,14 +9,14 @@ height = 148.0
 
 [node name="OldMan" type="Node2D"]
 
-[node name="Sprite2D" type="RigidBody2D" parent="."]
+[node name="Old Man" type="RigidBody2D" parent="."]
 disable_mode = 1
 collision_layer = 2
 script = ExtResource("1_v5rg1")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+[node name="Sprite" type="Sprite2D" parent="Old Man"]
 position = Vector2(10, 0)
 texture = ExtResource("1_c4caq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Old Man"]
 shape = SubResource("CapsuleShape2D_ik6ny")

@@ -11,10 +11,17 @@ var direction_timer = 0.0
 
 var x_size = 32
 
+@onready var PETE = preload("res://pete.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var index = randi_range(0, frames-1)
 	region_rect.position.x = index * 160
+	
+	var rand = randi_range(0, 100)
+	if (rand > 95):
+		texture = PETE
+		region_rect.position.x = 0
 	
 	screen_size = Vector2i(2592, 648)
 	set_random_direction()

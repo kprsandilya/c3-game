@@ -1,3 +1,5 @@
+#Got from the godot key bindings tutorial
+
 extends Button
 
 @export var action: String = "ui_up"

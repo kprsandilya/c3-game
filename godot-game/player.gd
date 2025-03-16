@@ -7,8 +7,10 @@ signal hit
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	con.hide()
 	#hide()
 
+@onready var con = get_node("../CanvasLayer/Control")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -38,8 +40,32 @@ func _process(delta):
 		else:
 			$sprite.animation = "down"
 		
-	
 	var collision = move_and_collide(velocity * delta)
+	
+	if collision != null and Input.is_action_just_pressed("e"):
+		var name = collision.get_collider().name
+
+		if name == "Old Man":
+			var con = get_tree().get_root().find_child("Control", true, false)
+
+			if con:
+				con.visible = not con.visible
+				con.queue_redraw()
+				con.set_z_index(100)  # Bring to front
+				con.size = get_viewport_rect().size
+				con.custom_minimum_size = get_viewport_rect().size
+
+				if con.visible:
+					velocity = Vector2.ZERO
+					$sprite.stop()
+					set_process(false)  # Disable movement
+				else:
+					set_process(true)  # Re-enable movement
+
+				print("Panel toggled:", con.visible)
+			else:
+				print("Error: Control node not found!")
+
 
 
 func _on_visibility_screen_exited():

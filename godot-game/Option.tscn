@@ -162,6 +162,23 @@ toggle_mode = true
 script = ExtResource("2_2nsca")
 action = "ui_right"
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="HBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[font_size=24]Dialogue[/font_size]"
+fit_content = true
+
+[node name="Button3" type="Button" parent="HBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+script = ExtResource("2_2nsca")
+action = "e"
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
 offset_left = 33.0
@@ -178,4 +195,5 @@ script = SubResource("GDScript_w630v")
 [connection signal="toggled" from="HBoxContainer/HBoxContainer/Button2" to="HBoxContainer/HBoxContainer/Button2" method="_toggled"]
 [connection signal="toggled" from="HBoxContainer/HBoxContainer2/Button3" to="HBoxContainer/HBoxContainer2/Button3" method="_toggled"]
 [connection signal="toggled" from="HBoxContainer/HBoxContainer3/Button3" to="HBoxContainer/HBoxContainer3/Button3" method="_toggled"]
+[connection signal="toggled" from="HBoxContainer/HBoxContainer4/Button3" to="HBoxContainer/HBoxContainer4/Button3" method="_toggled"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
