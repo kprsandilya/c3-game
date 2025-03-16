@@ -21,6 +21,9 @@ var jyou = 0
 @onready var farmyou = preload("res://Player2FarmerTextbox.png")
 @onready var farmthem = preload("res://Farmer2PlayerTextbox.png")
 
+var sets = []
+
+var month
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,14 +32,31 @@ func _ready():
 	luigi.hide()
 	options.visible = false
 	options2.visible = false
-	#hide()
 	
-func set_zero():
-	itotal = 0
+	month = int(Weather.week / 6)
+
+	var file = FileAccess.open("res://FarmerNPC.txt", FileAccess.READ)
+	var content = file.get_as_text().split('\n')
+	for i in range(0, 24, 6):
+		sets.append(content.slice(i, i + 6))  # Extract sets of 6 lines
+	
+	initial()
+	
+func initial():
+	itotal = 6 * month
 	i = 0
 	iyou = 0
 
-	jtotal = 0
+	jtotal = month
+	j = 0
+	jyou = 0
+	
+func set_zero():
+	itotal = 6 * month
+	i = 0
+	iyou = 0
+
+	jtotal = 6 * month
 	j = 0
 	jyou = 0
 	
@@ -146,15 +166,20 @@ func _on_button_pressed() -> void:
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
 		
-	if not Weather.dialogue_bools[int(Weather.week / 4)]:
+	if not Weather.dialogue_bools[int(Weather.week / 4)] and (month == 2  or month == 4):
 		print(itotal)
 		
-		if (itotal == 3):
+		if month == 2:
+			content = sets[1]
+		else:
+			content = sets[2]
+		
+		if (fmod(itotal, 6) == 3):
 			options.visible = true
 		else:
 			options.visible = false
 	
-		if (itotal < 3):
+		if (fmod(itotal, 6) < 3):
 			bg.texture = them
 			if (itotal >= content.size()):
 				con.visible = false
@@ -164,10 +189,10 @@ func _on_button_pressed() -> void:
 				
 			text.text = content[itotal]
 			i += 1
-		elif itotal == 3:
+		elif fmod(itotal, 6) == 3:
 			bg.texture = you
 			text.text = ""
-		elif itotal == 4:
+		elif fmod(itotal, 6) == 4:
 			print("SLDKFJLSDKJF")
 			text.text = content[itotal]
 			bg.texture = them
@@ -179,7 +204,7 @@ func _on_button_pressed() -> void:
 			
 	else:
 		print("OVER HERE" + str(itotal))
-		if (itotal < 3):
+		if (fmod(itotal, 6) < 3):
 			if (fmod(itotal, 2) == 0):
 				bg.texture = them
 				text.text = content[24 + itotal]
@@ -203,17 +228,22 @@ func _on_button2_pressed() -> void:
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
 		
-	if not Weather.dialogue_bools[int(Weather.week / 4)]:
+	if not Weather.dialogue_bools[int(Weather.week / 4)] and (month == 0  or month == 6):
 		print(jtotal)
 		
-		if (jtotal == 3):
+		if month == 0:
+			content = sets[0]
+		else:
+			content = sets[3]
+		
+		if (fmod(jtotal, 6) == 3):
 			options2.visible = true
 		else:
 			options2.visible = false
 	
-		if (jtotal < 3):
+		if (fmod(jtotal, 6) < 3):
 			bg.texture = farmthem
-			if (jtotal >= content.size()):
+			if (fmod(jtotal, 6) >= content.size()):
 				luigi.visible = false
 				set_process(true)
 				set_zero()
@@ -221,10 +251,10 @@ func _on_button2_pressed() -> void:
 				
 			text.text = content[jtotal]
 			j += 1
-		elif jtotal == 3:
+		elif fmod(jtotal, 6) == 3:
 			bg.texture = farmyou
 			text.text = ""
-		elif jtotal == 4:
+		elif fmod(jtotal, 6) == 4:
 			text.text = content[jtotal]
 			bg.texture = farmthem
 		else:
@@ -234,7 +264,7 @@ func _on_button2_pressed() -> void:
 			return
 			
 	else:
-		if (jtotal < 3):
+		if (fmod(jtotal, 6) < 3):
 			if (fmod(jtotal, 2) == 0):
 				bg.texture = farmthem
 				text.text = content[24 + jtotal]
