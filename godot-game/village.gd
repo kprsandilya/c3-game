@@ -14,6 +14,7 @@ func _ready() -> void:
 
 		# Add the NPC instance to the current scene
 		add_child(npc_instance)
+	$AudioStreamPlayer.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,4 +27,5 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 
 func _on_week_pressed() -> void:
 	Weather.week += 1
+	Weather.week_changed = true
 	get_tree().change_scene_to_file("res://Home Scene.tscn")

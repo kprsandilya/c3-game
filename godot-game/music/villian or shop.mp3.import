@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dekrf6h41esro"
+path="res://.godot/imported/villian or shop.mp3-d3a241770b883e06754b8b20a007e488.mp3str"
+
+[deps]
+
+source_file="res://music/villian or shop.mp3"
+dest_files=["res://.godot/imported/villian or shop.mp3-d3a241770b883e06754b8b20a007e488.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

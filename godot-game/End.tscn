@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cn4p0a3ifhijj"]
+[gd_scene load_steps=5 format=3 uid="uid://cn4p0a3ifhijj"]
 
 [ext_resource type="Script" path="res://end.gd" id="1_2nkuu"]
 [ext_resource type="Texture2D" uid="uid://n3uqt7cb1n2r" path="res://assets/farmBackground.png" id="1_7iafg"]
+[ext_resource type="AudioStream" uid="uid://djt1y77f58us4" path="res://music/rest or main menu.mp3" id="3_6bado"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3suox"]
 bg_color = Color(0.482353, 0.631373, 0.662745, 0.623529)
@@ -50,3 +51,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_3suox")
 text = "PLACEHOLDER"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6bado")
+autoplay = true

@@ -17,7 +17,7 @@ func _ready() -> void:
 	ichu.text = str(Weather.plant_array[3])
 	sol.text = str("SOL: ", Weather.sol)
 	
-
+	$Panel/AudioStreamPlayer.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

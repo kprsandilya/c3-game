@@ -2,14 +2,17 @@
 extends Node
 class_name PlayerProperties
 
-var plant_array: Array = [13, 13, 13, 13]
+@export var seedling_scene = preload("res://seedling.tscn") 
+
+var plant_array: Array = [14, 14, 14, 14]
 var plant_health: Array = [70, 60, 50, 40]
 var plant_hidden: Array = [false, false, false, false]
 
 var week_states = ["rain", "snow", "clear", "drought"]
 var max_weeks = 40
 var week_array = []
-	
+
+var bought = [0,0,0,0]
 
 var sol_per_plant: Array = [5, 10, 15, 20]
 
@@ -27,11 +30,39 @@ var water_level: int = 100
 
 var weather_type: String = ""
 
+var seedling_array: Array = []
+
+var column_spacing = 72  # Adjust for spacing
+var start_x = 58  # Adjust for horizontal alignment
+
+var row_y_positions = [250, 350, 450, 550]  # Adjust these based on your image
+var type_array = [0, 1, 2, 3]
+var health_array = [70, 60, 50, 40]
+
+var week_changed = false
+
 # Initialize the resource with given data
+#Used ChatGPT to help generate function, Prompt: How can I generate seedlings
+#on generation in an efficient manner.
 func _init():
 	for week in range(0, max_weeks):
 		week_array.append(randi_range(0, 3))
 		print(week_array[week])
+		
+	for row in range(0,4):
+		var row_array = []
+		for col in range(plant_array[row]):
+			var seedling = seedling_scene.instantiate()
+			var x_pos = start_x + col * column_spacing
+			var y_pos = row_y_positions[row]  # Use manual Y-coordinate
+			seedling.position = Vector2(x_pos, y_pos)
+			
+			seedling.set_meta("plant_type", type_array[row])
+			seedling.set_meta("plant_health", health_array[row])
+			add_child(seedling)
+			row_array.append(seedling)
+			
+		seedling_array.append(row_array)
 
 # Print player properties
 func Print() -> void:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtwq4522nutgs"]
+[gd_scene load_steps=8 format=3 uid="uid://dtwq4522nutgs"]
 
 [ext_resource type="Texture2D" uid="uid://hr6putfx44t8" path="res://potato_healthy.png" id="1_2rsn5"]
 [ext_resource type="Script" path="res://store.gd" id="1_b464h"]
 [ext_resource type="Texture2D" uid="uid://dqx4rpsb68htc" path="res://fava_healthy.png" id="3_71kv6"]
 [ext_resource type="Texture2D" uid="uid://bb3secunecqoy" path="res://quinoa_healthy.png" id="3_y5rnr"]
 [ext_resource type="Texture2D" uid="uid://u36vhusj1u14" path="res://ichu_healthy.png" id="4_qmdbe"]
+[ext_resource type="AudioStream" uid="uid://dekrf6h41esro" path="res://music/villian or shop.mp3" id="6_frtet"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvdgt"]
 bg_color = Color(0.709804, 0.678431, 0.141176, 1)
@@ -232,6 +233,10 @@ theme_override_font_sizes/font_size = 24
 [node name="MarginContainer2" type="MarginContainer" parent="Panel/HBoxContainer/VBoxContainer2/BoxContainer4/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Panel"]
+stream = ExtResource("6_frtet")
+autoplay = true
 
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/BoxContainer/Sprite2D" to="." method="_on_potato_pressed"]
 [connection signal="pressed" from="Panel/HBoxContainer/VBoxContainer2/BoxContainer2/Sprite2D" to="." method="_on_fava_pressed"]

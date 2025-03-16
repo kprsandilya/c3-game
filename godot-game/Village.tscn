@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://q1mww70eu4ri"]
+[gd_scene load_steps=28 format=4 uid="uid://q1mww70eu4ri"]
 
 [ext_resource type="Script" path="res://village_player.gd" id="1_d7o40"]
 [ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
@@ -19,7 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c5ysfevjradsp" path="res://old_man.tscn" id="17_uejo6"]
 [ext_resource type="Texture2D" uid="uid://bijsjsvkyuo44" path="res://Farmer2PlayerTextbox.png" id="18_jltr5"]
 [ext_resource type="Texture2D" uid="uid://m1k1aim1iy5w" path="res://OldMan2PlayerTextbox.png" id="18_st7q8"]
-[ext_resource type="PackedScene" path="res://luigi.tscn" id="19_h2miy"]
+[ext_resource type="PackedScene" uid="uid://6xime4un6n1q" path="res://luigi.tscn" id="19_h2miy"]
+[ext_resource type="AudioStream" uid="uid://c27kdl6obfoae" path="res://music/summer maybe.mp3" id="21_yu2eu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cuvet"]
 texture = ExtResource("7_hdfpe")
@@ -341,6 +342,11 @@ text = "NEXT WEEK"
 
 [node name="OldMan2" parent="." instance=ExtResource("19_h2miy")]
 position = Vector2(204, 404)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_yu2eu")
+autoplay = true
+parameters/looping = true
 
 [connection signal="screen_exited" from="player2/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
 [connection signal="pressed" from="CanvasLayer/Control/Button" to="player2" method="_on_button_pressed"]

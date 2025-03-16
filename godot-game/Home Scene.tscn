@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cdrtq37isbgq4"]
+[gd_scene load_steps=28 format=4 uid="uid://cdrtq37isbgq4"]
 
 [ext_resource type="Script" path="res://farmManager.gd" id="1_kj4lw"]
 [ext_resource type="Script" path="res://farm_player.gd" id="1_lyjrp"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://61ssuhjkasu5" path="res://empty.png" id="9_o2fdn"]
 [ext_resource type="Texture2D" uid="uid://bha84w8s0ihq7" path="res://pngtree-essential-features-to-consider-when-selecting-a-water-tank-for-your-png-image_13492880.png" id="19_mewjs"]
 [ext_resource type="Script" path="res://water_tank.gd" id="20_k5als"]
+[ext_resource type="AudioStream" uid="uid://bq5qf5mtlxho6" path="res://music/contry.mp3" id="21_1yk6c"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_krfgp"]
 animations = [{
@@ -767,7 +768,6 @@ script = ExtResource("20_k5als")
 
 [node name="Sprite2D" type="Sprite2D" parent="water_tank"]
 position = Vector2(0, -3.05176e-05)
-scale = Vector2(1, 1)
 texture = ExtResource("19_mewjs")
 
 [node name="water" type="Label" parent="water_tank"]
@@ -781,8 +781,12 @@ text = "Press E to water"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="water_tank"]
 position = Vector2(0, -2.71797e-05)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_7yp5i")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_1yk6c")
+autoplay = true
+parameters/looping = true
 
 [connection signal="screen_exited" from="player/visibility" to="player" method="_on_visibility_screen_exited"]
 [connection signal="body_entered" from="water_tank" to="water_tank" method="_on_body_entered"]

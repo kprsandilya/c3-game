@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://byilpdeb716nr"]
+[gd_scene load_steps=7 format=3 uid="uid://byilpdeb716nr"]
 
 [ext_resource type="Script" path="res://option.gd" id="1_7yjx3"]
 [ext_resource type="Script" path="res://Remap.gd" id="2_2nsca"]
+[ext_resource type="AudioStream" uid="uid://djt1y77f58us4" path="res://music/rest or main menu.mp3" id="3_2gk73"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2xsh"]
 bg_color = Color(0.423845, 0.66695, 0.4791, 1)
@@ -189,6 +190,10 @@ theme_override_colors/icon_normal_color = Color(0.890174, 0.551234, 0.710375, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_jeu7j")
 text = "MENU"
 script = SubResource("GDScript_w630v")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2gk73")
+autoplay = true
 
 [connection signal="item_selected" from="HBoxContainer/Names/Option" to="." method="_on_option_item_selected"]
 [connection signal="toggled" from="HBoxContainer/Settings/Button" to="HBoxContainer/Settings/Button" method="_toggled"]

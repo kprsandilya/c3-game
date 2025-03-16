@@ -8,7 +8,7 @@ extends Node2D
 
 
 # Number of columns
-var column_count = 14  
+var column_count = Weather.plant_array
 var column_spacing = 72  # Adjust for spacing
 var start_x = 58  # Adjust for horizontal alignment
 var type
@@ -17,14 +17,17 @@ var health_array = [70, 60, 50, 40]
 
 # Manually set Y-coordinates for each row based on grassy positions
 var row_y_positions = [250, 350, 450, 550]  # Adjust these based on your image
-var seedling_array = []
+var seedling_array = Weather.seedling_array
 var seedling_types = []
 var type_array = [0, 1, 2, 3]
 
 func _ready():
-	place_seedlings()
+	$AudioStreamPlayer.play()
+	#place_seedlings()
 	change_texture()
-	update_health()
+	if Weather.week_changed:
+		update_health()
+		Weather.week_changed = false
 	#for row in seedling_array:
 		#for seedling in row:
 #
@@ -38,7 +41,7 @@ func place_seedlings():
 	#var row_array= []
 	for row in range(row_y_positions.size()):
 		var row_array = []
-		for col in range(column_count):
+		for col in range(column_count[row]):
 			var seedling = seedling_scene.instantiate()
 			var x_pos = start_x + col * column_spacing
 			var y_pos = row_y_positions[row]  # Use manual Y-coordinate

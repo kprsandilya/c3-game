@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dluedklbbgc5a"
+path="res://.godot/imported/night ig.mp3-e98740e2349cc3461a778aa537076220.mp3str"
+
+[deps]
+
+source_file="res://music/night ig.mp3"
+dest_files=["res://.godot/imported/night ig.mp3-e98740e2349cc3461a778aa537076220.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

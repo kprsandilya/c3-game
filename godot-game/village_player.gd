@@ -40,6 +40,9 @@ func set_zero():
 	j = 0
 	jyou = 0
 	
+	get_node("../CanvasLayer/Control/Panel/TextureRect").texture = them
+	get_node("../CanvasLayer/Control2/Panel/TextureRect").texture = farmthem
+	
 	get_node("../CanvasLayer/Control/RichTextLabel").text = "HELLO!"
 	get_node("../CanvasLayer/Control2/RichTextLabel").text = "HELLO!"
 	
@@ -238,9 +241,11 @@ func _set_option() -> void:
 	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
 	var contentyou = file2.get_as_text().split('\n')
 
+	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 
 	text.text = contentyou[i]
+	bg.texture = them
 	
 	i += 1
 	itotal += 1
@@ -249,10 +254,13 @@ func _set_option() -> void:
 		
 func _set_option2() -> void:
 	Weather.Print()
+	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
 	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
 	var contentyou = file2.get_as_text().split('\n')
 
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
+	
+	bg.texture = farmthem
 
 	text.text = contentyou[j]
 	
@@ -262,40 +270,52 @@ func _set_option2() -> void:
 	options2.visible = false
 		
 func _option2_potato_pressed() -> void:
-	Weather.plant_array[0] -= 1
+	if (Weather.bought[0] > 0):
+		Weather.plant_array[0] -= 1
 
 	_set_option2()
 
 
 func _option2_fava_pressed() -> void:
-	Weather.plant_array[1] -= 1
+	if (Weather.bought[1] > 0):
+		Weather.plant_array[1] -= 1
 	
 	_set_option2()
 
 func _option2_quinoa_pressed() -> void:
-	Weather.plant_array[2] -= 1
+	if (Weather.bought[2] > 0):
+		Weather.plant_array[2] -= 1
 	_set_option2()
 
 
 func _option2_ichu_pressed() -> void:
-	Weather.plant_array[3] -= 1
+	if (Weather.bought[3] > 0):
+		Weather.plant_array[3] -= 1
 	_set_option2()
 
 
 func _option_potato_pressed() -> void:
-	Weather.plant_array[0] -= 1
+	if (Weather.bought[0] == 0):
+		Weather.plant_array[0] -= 1
+		Weather.bought[0] = 1
 	_set_option()
 
 
 func _option_fava_pressed() -> void:
-	Weather.plant_array[1] -= 1
+	if (Weather.bought[1] == 0):
+		Weather.plant_array[1] -= 1
+		Weather.bought[1] = 1
 	_set_option()
 
 func _option_quinoa_pressed() -> void:
-	Weather.plant_array[2] -= 1
+	if (Weather.bought[2] == 0):
+		Weather.plant_array[2] -= 1
+		Weather.bought[2] = 1
 	_set_option()
 
 
 func _option_ichu_pressed() -> void:
-	Weather.plant_array[3] -= 1
+	if (Weather.bought[3] == 0):
+		Weather.plant_array[3] -= 1
+		Weather.bought[3] = 1
 	_set_option()
