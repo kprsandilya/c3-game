@@ -265,4 +265,9 @@ func play_music():
 	$AudioStreamPlayer.play()  # 
 
 func update_week_label():
-	week_label.text = "Week: " + str(Weather.week + 1)
+	var season
+	if(Weather.week < 12):
+		season = "Planting Season"
+	else:
+		season = "Rainy Season"
+	week_label.text = "Week: " + str(Weather.week + 1) + "/32 - Weather: "+ str(Weather.week_states[Weather.week_array[Weather.week]]) + ' - ' + str(season)
