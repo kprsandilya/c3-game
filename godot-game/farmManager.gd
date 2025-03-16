@@ -1,6 +1,5 @@
 extends Node2D
 
-#ChatGPT usage, Prompt: Need to update plant seedlings texture per row based on the type 
 @export var seedling_scene = preload("res://seedling.tscn") 
 @export var potato_texture = preload("res://potato_healthy.png")
 @export var fava_texture = preload("res://fava_healthy.png")
@@ -15,8 +14,8 @@ extends Node2D
 @export var music1 = preload("res://music/contry.mp3")
 @export var music2 = preload("res://music/spring.mp3")
 
-var column_spacing = 72 
-var start_x = 58  
+var column_spacing = 72  # Adjust for spacing
+var start_x = 58  # Adjust for alignment
 
 var state = Weather.week_states[Weather.week_array[Weather.week]]
 
@@ -33,7 +32,7 @@ var type_array = [0, 1, 2, 3]  # Plant types
 @export var texture_array : Array
 
 func _ready():
-	add_to_group("player") 
+	add_to_group("player")  # Adds the player to the "player" group
 	if Weather.week == Weather.max_weeks:
 		get_tree().change_scene_to_file("res://Store.tscn")
 	$AudioStreamPlayer.play()
@@ -48,13 +47,14 @@ func _ready():
 
 	message_label.hide()  # Hide message at start
 
+	#await get_tree().create_timer(0.1).timeout
 	near_water_tank = false
 	
 	print("WATER LEVEL: " + str(Weather.water_level) + " STATE: " + state)
-	print(Weather.seedling_array[0][0].get_meta("plant_health"))
-	print(Weather.seedling_array[1][0].get_meta("plant_health"))
-	print(Weather.seedling_array[2][0].get_meta("plant_health"))
-	print(Weather.seedling_array[3][0].get_meta("plant_health"))
+	print(Weather.plant_health[0])
+	print(Weather.plant_health[1])
+	print(Weather.plant_health[2])
+	print(Weather.plant_health[3])
 
 func _process(_delta):
 	var increment = 10
@@ -65,9 +65,19 @@ func _process(_delta):
 			Weather.water_level -= 20
 			print("WATER LEVEL: " + str(Weather.water_level))
 			
+			if(Weather.plant_health[0] < health_array[0]):
+				Weather.plant_health[0] += increment
+			if(Weather.plant_health[1] < health_array[1]):
+				Weather.plant_health[1] += increment
+			if(Weather.plant_health[2] < health_array[2]):
+				Weather.plant_health[2] += increment
+			if(Weather.plant_health[3] < health_array[3]):
+				Weather.plant_health[3] += increment
+				
 			for row in range(Weather.seedling_array.size()):
 				for seedling in Weather.seedling_array[row]:
 					var new_health = min(seedling.get_meta("plant_health") + increment, health_array[row])
+					new_health = Weather.plant_health[row]
 					seedling.set_meta("plant_health", new_health)
 					
 					var health_label = seedling.get_node("health")
@@ -78,14 +88,15 @@ func _process(_delta):
 	else:
 		message_label.hide()
 
-#ChatGPT, Prompt: how can I efficiently place seedling scenes onto a .png map
 func place_seedlings():
+	# Clear existing seedlings (for re-generation)
 	for row in Weather.seedling_array:
 		for seedling in row:
 			if seedling != null and seedling.is_inside_tree():
-				seedling.queue_free()  
+				seedling.queue_free()  # Only call queue_free on valid nodes
 	Weather.seedling_array.clear()
 
+	# Now add new seedlings
 	for row in range(row_y_positions.size()):
 		var row_array = []
 		var column_count = Weather.plant_array[row]
@@ -138,15 +149,46 @@ func update_health():
 	
 	if state == "clear":
 		increment = -10
+		if(Weather.plant_health[0] > 0):
+			Weather.plant_health[0] += increment
+		if(Weather.plant_health[1] > 0):
+			Weather.plant_health[1] += increment
+		if(Weather.plant_health[2] > 0):
+			Weather.plant_health[2] += increment
+		if(Weather.plant_health[3] > 0):
+			Weather.plant_health[3] += increment
 	elif state == "rain":
 		increment = 10
+		if(Weather.plant_health[0] < health_array[0]):
+			Weather.plant_health[0] += 10
+		if(Weather.plant_health[1] < health_array[1]):
+			Weather.plant_health[1] += 10
+		if(Weather.plant_health[2] < health_array[2]):
+			Weather.plant_health[2] += 10
+		if(Weather.plant_health[3] < health_array[3]):
+			Weather.plant_health[3] += 10
 		Weather.water_level = min(Weather.water_level + 50, 100)
 	elif state == "drought":
 		increment = -20
+		if(Weather.plant_health[0] > 0):
+			Weather.plant_health[0] += increment
+		if(Weather.plant_health[1] > 0):
+			Weather.plant_health[1] += increment
+		if(Weather.plant_health[2] > 0):
+			Weather.plant_health[2] += increment
+		if(Weather.plant_health[3] > 0):
+			Weather.plant_health[3] += increment
 	elif state == "snow":
 		increment = -5
+		if(Weather.plant_health[0] > 0):
+			Weather.plant_health[0] += increment
+		if(Weather.plant_health[1] > 0):
+			Weather.plant_health[1] += increment
+		if(Weather.plant_health[2] > 0):
+			Weather.plant_health[2] += increment
+		if(Weather.plant_health[3] > 0):
+			Weather.plant_health[3] += increment
 	print("Weather State:", state, " | Increment:", increment)
-
 
 	for row in range(Weather.seedling_array.size()):
 		var new_row = []  # Store only seedlings that survive
@@ -156,15 +198,14 @@ func update_health():
 			if seedling != null and seedling.is_inside_tree():
 				var new_health = seedling.get_meta("plant_health") + increment
 				
-				
 				if row == 0:
-					new_health = clamp(new_health, 0, Weather.plant_health[0])
+					new_health = Weather.plant_health[0]
 				elif row == 1:
-					new_health = clamp(new_health, 0, Weather.plant_health[1])
+					new_health = Weather.plant_health[1]
 				elif row == 2:
-					new_health = clamp(new_health, 0, Weather.plant_health[2])
+					new_health = Weather.plant_health[2]
 				elif row == 3:
-					new_health = clamp(new_health, 0, Weather.plant_health[3])
+					new_health = Weather.plant_health[3]
 				
 				seedling.set_meta("plant_health", new_health)
 				var health_label = seedling.get_node("health")
@@ -175,8 +216,16 @@ func update_health():
 					new_row.append(seedling)  # Keep alive seedlings
 				else:
 					seedling.queue_free()  # Remove dead seedlings
+					Weather.plant_array[row] -= 1
 
 		Weather.seedling_array[row] = new_row  # Update row with only surviving seedlings
+
+	#if new_health > 0:
+	#	new_row.append(seedling)  # Keep alive seedlings
+	#else:
+	#seedling.queue_free()  # Remove dead seedlings
+
+	# Weather.seedling_array[row] = new_row  # Update row with only surviving seedlings
 		
 func update_tank():
 	var sprite = get_node("water_tank/Sprite2D")
@@ -192,12 +241,10 @@ func update_tank():
 		sprite.texture = water5
 	elif Weather.water_level  == 0:
 		sprite.texture = water6
-	
+
 func play_music():
 	if state == "rain" or state == "snow" or state == "drought":
 		$AudioStreamPlayer.stream = music2
 	else:
 		$AudioStreamPlayer.stream = music1
 	$AudioStreamPlayer.play()  # 
-
-	
