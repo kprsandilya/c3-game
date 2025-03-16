@@ -107,8 +107,7 @@ func change_texture():
 				elif plant_type == 3:
 					sprite.texture = ichu_texture
 
-func _on_WaterTank_area_entered(_area):
-	print(_area)
+func _on_WaterTank_area_entered(_area): 
 	near_water_tank = true
 	message_label.show()  # Show message when player is near the water tank
 
