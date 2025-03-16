@@ -6,6 +6,11 @@ var plant_array: Array = [13, 13, 13, 13]
 var plant_health: Array = [70, 60, 50, 40]
 var plant_hidden: Array = [false, false, false, false]
 
+var week_states = ["rain", "snow", "clear", "drought"]
+var max_weeks = 40
+var week_array = []
+	
+
 var sol_per_plant: Array = [5, 10, 15, 20]
 
 var flags: Array = [false, false]
@@ -24,7 +29,9 @@ var weather_type: String = ""
 
 # Initialize the resource with given data
 func _init():
-	pass
+	for week in range(0, max_weeks):
+		week_array.append(randi_range(0, 3))
+		print(week_array[week])
 
 # Print player properties
 func Print() -> void:
