@@ -14,6 +14,8 @@ var max_weeks = 32
 var week_array = []
 # var week_array = [2, 2, 1, 0, 2, 3, 0, 0, 2, 2, 3, 2, 0, 0, 0, 2, 2, 2, 0, 2, 2, 3, 3, 2, 2, 2, 0, 2, 0, 2, 0, 0]
 
+var dialogue_bools = [false, false, false, false, false, false, false, false]
+
 var bought = [0,0,0,0]
 
 var sol_per_plant: Array = [5, 10, 15, 20]

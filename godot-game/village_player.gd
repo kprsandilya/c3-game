@@ -46,6 +46,10 @@ func set_zero():
 	get_node("../CanvasLayer/Control/RichTextLabel").text = "HELLO!"
 	get_node("../CanvasLayer/Control2/RichTextLabel").text = "HELLO!"
 	
+	Weather.dialogue_bools[int(Weather.week / 4)] = true
+	
+	print("ZEROED")
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -142,153 +146,145 @@ func _on_button_pressed() -> void:
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
 		
-	if (true):
+	if not Weather.dialogue_bools[int(Weather.week / 4)]:
 		print(itotal)
 		
-		if (itotal == 4):
+		if (itotal == 3):
 			options.visible = true
 		else:
 			options.visible = false
 	
-		if (itotal < 4 or itotal > 4):
+		if (itotal < 3):
 			bg.texture = them
-			if (i >= content.size()):
+			if (itotal >= content.size()):
 				con.visible = false
 				set_process(true)
 				set_zero()
 				return
 				
-			text.text = content[i]
+			text.text = content[itotal]
 			i += 1
-		elif itotal == 4:
+		elif itotal == 3:
 			bg.texture = you
-			if (iyou >= content.size()):
-				con.visible = false
-				set_process(true)
-				set_zero()
-				return
-		elif itotal > 5:
+			text.text = ""
+		elif itotal == 4:
+			print("SLDKFJLSDKJF")
+			text.text = content[itotal]
+			bg.texture = them
+		else:
 			con.visible = false
 			set_zero()
 			set_process(true)
 			return
 			
 	else:
-		if (itotal < 1 or itotal > 1):
-			bg.texture = them
-			if (i >= content.size()):
-				con.visible = false
-				set_process(true)
-				set_zero()
-				return
-				
-			text.text = content[i]
-			i += 1
+		print("OVER HERE" + str(itotal))
+		if (itotal < 3):
+			if (fmod(itotal, 2) == 0):
+				bg.texture = them
+				text.text = content[24 + itotal]
+			else:
+				bg.texture = you
+				text.text = "Hi!"
 		else:
-			bg.texture = you
-			if (iyou >= content.size()):
-				con.visible = false
-				set_process(true)
-				set_zero()
-				return
+			con.visible = false
+			set_zero()
+			set_process(true)
+			return
 			
 			
 	itotal += 1
 
 
 func _on_button2_pressed() -> void:
-	var file = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var file = FileAccess.open("res://FarmerNPC.txt", FileAccess.READ)
 	var content = file.get_as_text().split('\n')
-	
-	var file2 = FileAccess.open("res://tempyou.txt", FileAccess.READ)
-	var contentyou = file2.get_as_text().split('\n')
 	
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
-	
-	if (true):
 		
-		if (jyou == 0):
+	if not Weather.dialogue_bools[int(Weather.week / 4)]:
+		print(jtotal)
+		
+		if (jtotal == 3):
 			options2.visible = true
 		else:
 			options2.visible = false
 	
-		if (fmod(jtotal, 2) == 1):
+		if (jtotal < 3):
 			bg.texture = farmthem
-			if (j >= content.size()):
+			if (jtotal >= content.size()):
 				luigi.visible = false
 				set_process(true)
 				set_zero()
 				return
 				
-			text.text = content[j]
+			text.text = content[jtotal]
 			j += 1
-		else:
+		elif jtotal == 3:
 			bg.texture = farmyou
-			if (jyou >= contentyou.size()):
-				luigi.visible = false
-				set_process(true)
-				set_zero()
-				return
-			text.text = contentyou[jyou]
-			jyou += 1
+			text.text = ""
+		elif jtotal == 4:
+			text.text = content[jtotal]
+			bg.texture = farmthem
+		else:
+			luigi.visible = false
+			set_zero()
+			set_process(true)
+			return
 			
-		jtotal += 1
 	else:
-		if (fmod(jtotal, 2) == 1):
-			bg.texture = farmthem
-			if (j >= content.size()):
-				luigi.visible = false
-				set_process(true)
-				set_zero()
-				return
-				
-			text.text = content[j]
-			j += 1
+		if (jtotal < 3):
+			if (fmod(jtotal, 2) == 0):
+				bg.texture = farmthem
+				text.text = content[24 + jtotal]
+			else:
+				bg.texture = farmyou
+				text.text = "Hi!"
 		else:
-			bg.texture = farmyou
-			if (jyou >= contentyou.size()):
-				luigi.visible = false
-				set_process(true)
-				set_zero()
-				return
-			text.text = contentyou[jyou]
-			jyou += 1
+			luigi.visible = false
+			set_zero()
+			set_process(true)
+			return
 			
-		jtotal += 1
+			
+	jtotal += 1
 
 func _set_option() -> void:
 	Weather.Print()
-	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
-	var contentyou = file2.get_as_text().split('\n')
+	var file2 = FileAccess.open("res://FarmerNPC.txt", FileAccess.READ)
+	var content = file2.get_as_text().split('\n')
 
 	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 
-	text.text = contentyou[i]
+	text.text = content[itotal]
 	bg.texture = them
 	
 	i += 1
 	itotal += 1
 	
+	text.text = content[itotal-1]
+	
 	options.visible = false
 	
 	Weather.update_seedlings()
-		
+	
 func _set_option2() -> void:
 	Weather.Print()
+	var file2 = FileAccess.open("res://FarmerNPC.txt", FileAccess.READ)
+	var content = file2.get_as_text().split('\n')
+
 	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
-	var file2 = FileAccess.open("res://temp.txt", FileAccess.READ)
-	var contentyou = file2.get_as_text().split('\n')
-
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
-	
-	bg.texture = farmthem
 
-	text.text = contentyou[j]
+	text.text = content[jtotal]
+	bg.texture = farmthem
 	
-	j += 1
-	jtotal += 1
+	i += 1
+	itotal += 1
+	
+	text.text = content[jtotal-1]
 	
 	options2.visible = false
 	

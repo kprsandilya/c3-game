@@ -143,6 +143,7 @@ metadata/_edit_group_ = true
 [node name="sprite" type="AnimatedSprite2D" parent="player2"]
 sprite_frames = SubResource("SpriteFrames_kggce")
 animation = &"up"
+speed_scale = 1.75
 
 [node name="player_hitbox" type="CollisionShape2D" parent="player2"]
 scale = Vector2(0.464353, 0.582693)
