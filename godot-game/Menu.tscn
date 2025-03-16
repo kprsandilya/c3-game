@@ -80,6 +80,7 @@ size_flags_horizontal = 3
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_nol88")
 autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/Option" to="." method="_on_option_pressed"]

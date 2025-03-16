@@ -14,7 +14,7 @@ var state = Weather.week_states[Weather.week_array[Weather.week]]
 var health_array = [70, 60, 50, 40]
 
 @onready var message_label = get_node("water_tank/water")
-@onready var water_tank_area = get_node("water_tank/CollisionShape2D")
+@onready var water_tank_area = get_node("water_tank")
 
 var near_water_tank = false
 var row_y_positions = [250, 350, 450, 550]  # Y-coordinates for rows
@@ -108,12 +108,13 @@ func change_texture():
 					sprite.texture = ichu_texture
 
 func _on_WaterTank_area_entered(_area):
-	if _area.is_in_group("player"):
-		near_water_tank = true
+	print(_area)
+	near_water_tank = true
+	message_label.show()  # Show message when player is near the water tank
 
 func _on_WaterTank_area_exited(_area):
-	if _area.is_in_group("player"):
-		near_water_tank = false
+	near_water_tank = false
+	message_label.hide()  # Show message when player is near the water tank
 	
 func update_health():
 	var increment = -10

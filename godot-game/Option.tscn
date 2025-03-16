@@ -194,6 +194,7 @@ script = SubResource("GDScript_w630v")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2gk73")
 autoplay = true
+parameters/looping = true
 
 [connection signal="item_selected" from="HBoxContainer/Names/Option" to="." method="_on_option_item_selected"]
 [connection signal="toggled" from="HBoxContainer/Settings/Button" to="HBoxContainer/Settings/Button" method="_toggled"]
