@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c5ysfevjradsp" path="res://old_man.tscn" id="17_uejo6"]
 [ext_resource type="Texture2D" uid="uid://bijsjsvkyuo44" path="res://Farmer2PlayerTextbox.png" id="18_jltr5"]
 [ext_resource type="Texture2D" uid="uid://m1k1aim1iy5w" path="res://OldMan2PlayerTextbox.png" id="18_st7q8"]
-[ext_resource type="PackedScene" uid="uid://6xime4un6n1q" path="res://luigi.tscn" id="19_h2miy"]
+[ext_resource type="PackedScene" path="res://luigi.tscn" id="19_h2miy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cuvet"]
 texture = ExtResource("7_hdfpe")
