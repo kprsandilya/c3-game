@@ -9,12 +9,12 @@ func _ready():
 		
 
 func _on_body_entered(body):
-	if body is CharacterBody2D:  # If the player enters the area
+	if body is CharacterBody2D and body.is_in_group("player"):  # If the player enters the area
 		message_label.show()
 		player_inside = true
 
 func _on_body_exited(body):
-	if body is CharacterBody2D:  # If the player leaves the area
+	if body is CharacterBody2D and body.is_in_group("player"):  # If the player leaves the area
 		message_label.hide()
 		player_inside = false
 

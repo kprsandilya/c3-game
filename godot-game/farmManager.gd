@@ -9,6 +9,8 @@ extends Node2D
 var column_spacing = 72  # Adjust for spacing
 var start_x = 58  # Adjust for alignment
 
+var state = Weather.week_states[Weather.week_array[Weather.week]]
+
 var health_array = [70, 60, 50, 40]
 
 @onready var message_label = get_node("water_tank/water")
@@ -18,24 +20,28 @@ var near_water_tank = false
 var row_y_positions = [250, 350, 450, 550]  # Y-coordinates for rows
 var type_array = [0, 1, 2, 3]  # Plant types
 
+@export var animated_texture : AnimatedTexture
+@export var texture_array : Array
+
 func _ready():
+	add_to_group("player")  # Adds the player to the "player" group
 	if Weather.week == Weather.max_weeks:
 		get_tree().change_scene_to_file("res://Store.tscn")
 	$AudioStreamPlayer.play()
 	place_seedlings()
 	change_texture()
+	
 
 	if Weather.week_changed:
 		update_health()
 		Weather.week_changed = false
 
-	if message_label:
-		message_label.hide()  # Hide message at start
+	message_label.hide()  # Hide message at start
 
-	await get_tree().create_timer(0.1).timeout
+	#await get_tree().create_timer(0.1).timeout
 	near_water_tank = false
 	
-	print("WATER LEVEL: " + str(Weather.water_level))
+	print("WATER LEVEL: " + str(Weather.water_level) + " STATE: " + state)
 	print(Weather.seedling_array[0][0].get_meta("plant_health"))
 	print(Weather.seedling_array[1][0].get_meta("plant_health"))
 	print(Weather.seedling_array[2][0].get_meta("plant_health"))
@@ -102,12 +108,14 @@ func change_texture():
 					sprite.texture = ichu_texture
 
 func _on_WaterTank_area_entered(_area):
-	near_water_tank = true
+	if _area.is_in_group("player"):
+		near_water_tank = true
 
 func _on_WaterTank_area_exited(_area):
-	near_water_tank = false
+	if _area.is_in_group("player"):
+		near_water_tank = false
+	
 func update_health():
-	var state = Weather.week_states[Weather.week_array[Weather.week]]
 	var increment = -10
 
 	if state == "rain":
