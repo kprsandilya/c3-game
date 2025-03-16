@@ -175,7 +175,10 @@ func update_health():
 		if(Weather.plant_health[3] + increment < health_array[3]):
 			Weather.plant_health[3] += increment
 		else: Weather.plant_health[3] = health_array[3]
-		Weather.water_level = min(Weather.water_level + 50, 100)
+		if(Weather.water_level < 0):
+			Weather.water_level = 0
+		Weather.water_level = min(Weather.water_level + 60, 100)
+		
 	elif state == "drought":
 		increment = -20
 		if(Weather.plant_health[0] > 0):
