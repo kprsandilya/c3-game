@@ -225,7 +225,7 @@ func _on_button2_pressed() -> void:
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
 		
-	if not Weather.dialogue_bools[int(Weather.week / 6)] and (month == 0  or month == 6):
+	if not Weather.dialogue_bools[int(Weather.week / 6)] and (int(Weather.week / 6) == 0  or int(Weather.week / 6) == 6):
 		print(jtotal, month)
 		
 		if month == 0:
