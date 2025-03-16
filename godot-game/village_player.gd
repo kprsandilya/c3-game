@@ -136,11 +136,8 @@ func _on_visibility_screen_exited():
 
 
 func _on_button_pressed() -> void:
-	var file = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var file = FileAccess.open("res://FarmerNPC.txt", FileAccess.READ)
 	var content = file.get_as_text().split('\n')
-	
-	var file2 = FileAccess.open("res://tempyou.txt", FileAccess.READ)
-	var contentyou = file2.get_as_text().split('\n')
 	
 	var text = get_node("../CanvasLayer/Control/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control/Panel/TextureRect")
@@ -150,29 +147,51 @@ func _on_button_pressed() -> void:
 	else:
 		options.visible = false
 		
+	if (true):
 	
-	if (fmod(itotal, 2) == 1):
-		bg.texture = them
-		if (i >= content.size()):
-			con.visible = false
-			set_process(true)
-			set_zero()
+		if (itotal < 4 or itotal > 4):
+			bg.texture = them
+			if (i >= content.size()):
+				con.visible = false
+				set_process(true)
+				set_zero()
+				return
+				
+			text.text = content[i]
+			i += 1
+		elif itotal == 4:
+			bg.texture = you
+			if (iyou >= content.size()):
+				con.visible = false
+				set_process(true)
+				set_zero()
+				return
+		elif itotal > 5:
 			return
 			
-		text.text = content[i]
-		i += 1
+			
+		itotal += 1
 	else:
-		bg.texture = you
-		if (iyou >= contentyou.size()):
-			con.visible = false
-			set_process(true)
-			set_zero()
-			return
-		text.text = contentyou[iyou]
-		iyou += 1
-		
-		
-	itotal += 1
+		if (itotal < 1 or itotal > 1):
+			bg.texture = them
+			if (i >= content.size()):
+				con.visible = false
+				set_process(true)
+				set_zero()
+				return
+				
+			text.text = content[i]
+			i += 1
+		else:
+			bg.texture = you
+			if (iyou >= content.size()):
+				con.visible = false
+				set_process(true)
+				set_zero()
+				return
+			
+			
+		itotal += 1
 
 
 func _on_button2_pressed() -> void:
