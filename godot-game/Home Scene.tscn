@@ -718,7 +718,7 @@ sources/1 = SubResource("TileSetAtlasSource_qk1wm")
 [node name="Node2D" type="Node2D"]
 
 [node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(553, 235)
+position = Vector2(1273, 495)
 scale = Vector2(1.11486, 1.20929)
 script = ExtResource("1_lyjrp")
 metadata/_edit_group_ = true

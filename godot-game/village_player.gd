@@ -3,6 +3,7 @@ extends CharacterBody2D
 var screen_size
 signal hit 
 
+var i = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 	con.hide()
 	#hide()
 
-@onready var con = get_node("../CanvasLayer/Control")
+@onready var con = get_tree().get_root().find_child("Control", true, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -46,7 +47,6 @@ func _process(delta):
 		var name = collision.get_collider().name
 
 		if name == "Old Man":
-			var con = get_tree().get_root().find_child("Control", true, false)
 
 			if con:
 				con.visible = not con.visible
@@ -70,3 +70,20 @@ func _process(delta):
 
 func _on_visibility_screen_exited():
 	get_tree().change_scene_to_file("res://Village.tscn") # Replace with function body.
+
+
+func _on_button_pressed() -> void:
+	var file = FileAccess.open("res://temp.txt", FileAccess.READ)
+	var content = file.get_as_text().split('\n')
+	
+	print(self)
+	var text = get_node("../CanvasLayer/Control/RichTextLabel")
+	
+	if (i >= content.size()):
+		con.visible = false
+		set_process(true)
+		return
+		
+	
+	text.text = content[i]
+	i += 1

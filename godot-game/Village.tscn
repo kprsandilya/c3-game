@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://q1mww70eu4ri"]
+[gd_scene load_steps=26 format=4 uid="uid://q1mww70eu4ri"]
 
 [ext_resource type="Script" path="res://village_player.gd" id="1_d7o40"]
 [ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
@@ -102,6 +102,20 @@ height = 70.0
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ogls6"]
 texture = ExtResource("18_st7q8")
 
+[sub_resource type="GDScript" id="GDScript_3ins6"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
 [node name="Village" type="Node2D"]
 script = ExtResource("1_qen8r")
 
@@ -163,4 +177,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ogls6")
 
+[node name="Button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 845.0
+offset_top = 575.0
+offset_right = 926.0
+offset_bottom = 604.0
+text = "NEXT"
+script = SubResource("GDScript_3ins6")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 231.0
+offset_top = 495.0
+offset_right = 833.0
+offset_bottom = 592.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[font_size=24]Hello![/font_size]"
+
 [connection signal="screen_exited" from="player2/VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="pressed" from="CanvasLayer/Control/Button" to="player2" method="_on_button_pressed"]
