@@ -52,11 +52,13 @@ func initial():
 	jyou = 0
 	
 func set_zero():
-	itotal = 6 * month
+	#itotal = 4 * month
+	itotal = 0
 	i = 0
 	iyou = 0
 
-	jtotal = 6 * month
+	#jtotal = 4 * month
+	jtotal = 0
 	j = 0
 	jyou = 0
 	
