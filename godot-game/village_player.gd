@@ -82,8 +82,6 @@ func _process(delta):
 		var adjusted_pos = collision_pos - collision.get_normal() * 0.1
 		var tile_pos = tilemap.local_to_map(adjusted_pos)
 		var tile_id = tilemap.get_cell_atlas_coords(tile_pos)
-		
-		print(tile_id.x)
 
 		if tile_id.x == 2:
 			get_tree().change_scene_to_file("Store.tscn")
@@ -107,7 +105,6 @@ func _process(delta):
 				else:
 					set_process(true)  # Re-enable movement
 
-				print("Panel toggled:", con.visible)
 			else:
 				print("Error: Control node not found!")
 		elif name == "Luigi":
@@ -126,7 +123,6 @@ func _process(delta):
 				else:
 					set_process(true)  # Re-enable movement
 
-				print("Panel toggled:", luigi.visible)
 			else:
 				print("Error: Control node not found!")
 
@@ -185,8 +181,6 @@ func _on_button2_pressed() -> void:
 	
 	var text = get_node("../CanvasLayer/Control2/RichTextLabel")
 	var bg = get_node("../CanvasLayer/Control2/Panel/TextureRect")
-	
-	print(contentyou)
 	
 	if (true):
 		

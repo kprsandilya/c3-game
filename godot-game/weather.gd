@@ -6,6 +6,8 @@ var plant_array: Array = [13, 13, 13, 13]
 var plant_health: Array = [70, 60, 50, 40]
 var plant_hidden: Array = [false, false, false, false]
 
+var sol_per_plant: Array = [5, 10, 15, 20]
+
 var flags: Array = [false, false]
 
 var sol: int = -10

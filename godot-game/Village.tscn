@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://c5ysfevjradsp" path="res://old_man.tscn" id="17_uejo6"]
 [ext_resource type="Texture2D" uid="uid://bijsjsvkyuo44" path="res://Farmer2PlayerTextbox.png" id="18_jltr5"]
 [ext_resource type="Texture2D" uid="uid://m1k1aim1iy5w" path="res://OldMan2PlayerTextbox.png" id="18_st7q8"]
-[ext_resource type="PackedScene" path="res://luigi.tscn" id="19_h2miy"]
+[ext_resource type="PackedScene" uid="uid://6xime4un6n1q" path="res://luigi.tscn" id="19_h2miy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cuvet"]
 texture = ExtResource("7_hdfpe")
@@ -159,7 +159,6 @@ limit_bottom = 648
 position = Vector2(1553, 429)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 z_index = 4
@@ -252,7 +251,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control2"]
-visible = false
 z_index = 5
 layout_mode = 1
 anchors_preset = 15
