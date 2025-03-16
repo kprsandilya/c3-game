@@ -9,11 +9,11 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	get_node("../water_tank/water").hide()
 	
-	#hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+# Used a Godot Tutorial for movement process
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	var velocity = Vector2.ZERO 
 	if Input.is_action_pressed("ui_right"):
 		velocity.x += 1
 	elif Input.is_action_pressed("ui_left"):
@@ -39,28 +39,10 @@ func _process(delta):
 		else:
 			$sprite.animation = "down"
 
+#ChatGPT, prompt: how can I register collisions with other collision nodes
 	var collision = move_and_collide(velocity * delta)
-	#var tilemap = get_node("../TileMapLayer")
-	#if collision:
-		#var collision_pos = collision.get_position()
-		#var adjusted_pos = collision_pos - collision.get_normal() * 0.1
-		#var tile_pos = tilemap.local_to_map(adjusted_pos)
-		#var tile_id = tilemap.get_cell_atlas_coords(tile_pos)
-		#if tile_id.x == 24:
-			#get_node("../water_tank/water").show()
-			#if Input.is_action_just_pressed("e"):
-				#get_node("../water_tank/water").hide()
-		#else:
-			#get_node("../water_tank/water").hide()
-	#else:
-		#get_node("../water_tank/water").hide()
-		
 		
 	
-	
-	
-
-
 
 func _on_visibility_screen_exited():
 	get_tree().change_scene_to_file("res://Village.tscn") # Replace with function body.

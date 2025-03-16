@@ -1,5 +1,6 @@
 extends Node2D
 
+#ChatGPT usage, Prompt: Need to update plant seedlings texture per row based on the type 
 @export var seedling_scene = preload("res://seedling.tscn") 
 @export var potato_texture = preload("res://potato_healthy.png")
 @export var fava_texture = preload("res://fava_healthy.png")
@@ -11,9 +12,11 @@ extends Node2D
 @export var water4 = preload("res://water4.png")
 @export var water5 = preload("res://water5.png")
 @export var water6 = preload("res://water6.png")
+@export var music1 = preload("res://music/contry.mp3")
+@export var music2 = preload("res://music/spring.mp3")
 
-var column_spacing = 72  # Adjust for spacing
-var start_x = 58  # Adjust for alignment
+var column_spacing = 72 
+var start_x = 58  
 
 var state = Weather.week_states[Weather.week_array[Weather.week]]
 
@@ -30,12 +33,13 @@ var type_array = [0, 1, 2, 3]  # Plant types
 @export var texture_array : Array
 
 func _ready():
-	add_to_group("player")  # Adds the player to the "player" group
+	add_to_group("player") 
 	if Weather.week == Weather.max_weeks:
 		get_tree().change_scene_to_file("res://Store.tscn")
 	$AudioStreamPlayer.play()
 	place_seedlings()
 	change_texture()
+	play_music()
 	
 
 	if Weather.week_changed:
@@ -44,7 +48,6 @@ func _ready():
 
 	message_label.hide()  # Hide message at start
 
-	#await get_tree().create_timer(0.1).timeout
 	near_water_tank = false
 	
 	print("WATER LEVEL: " + str(Weather.water_level) + " STATE: " + state)
@@ -75,15 +78,14 @@ func _process(_delta):
 	else:
 		message_label.hide()
 
+#ChatGPT, Prompt: how can I efficiently place seedling scenes onto a .png map
 func place_seedlings():
-	# Clear existing seedlings (for re-generation)
 	for row in Weather.seedling_array:
 		for seedling in row:
 			if seedling != null and seedling.is_inside_tree():
-				seedling.queue_free()  # Only call queue_free on valid nodes
+				seedling.queue_free()  
 	Weather.seedling_array.clear()
 
-	# Now add new seedlings
 	for row in range(row_y_positions.size()):
 		var row_array = []
 		var column_count = Weather.plant_array[row]
@@ -190,5 +192,12 @@ func update_tank():
 		sprite.texture = water5
 	elif Weather.water_level  == 0:
 		sprite.texture = water6
+	
+func play_music():
+	if state == "rain" or state == "snow" or state == "drought":
+		$AudioStreamPlayer.stream = music2
+	else:
+		$AudioStreamPlayer.stream = music1
+	$AudioStreamPlayer.play()  # 
 
 	

@@ -920,6 +920,7 @@ metadata/_edit_group_ = true
 position = Vector2(-174, 92)
 sprite_frames = SubResource("SpriteFrames_krfgp")
 animation = &"up"
+speed_scale = 1.75
 
 [node name="player_hitbox" type="CollisionShape2D" parent="player"]
 position = Vector2(-174.91, 89.3082)

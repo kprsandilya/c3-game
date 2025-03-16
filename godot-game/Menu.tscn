@@ -43,7 +43,7 @@ theme_override_constants/separation = 150
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[center][font_size=108]GAME NAME[/font_size][/center]"
+text = "[center][font_size=108]WHISPERS OF THE VALLEY[/font_size][/center]"
 fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
