@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=4 uid="uid://bcusd7ue7skrr"]
+[gd_scene load_steps=25 format=4 uid="uid://q1mww70eu4ri"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_d7o40"]
+[ext_resource type="Script" path="res://village_player.gd" id="1_d7o40"]
 [ext_resource type="Script" path="res://village.gd" id="1_qen8r"]
 [ext_resource type="Texture2D" uid="uid://3746cuthvauv" path="res://villageBackground.png" id="1_wgxkk"]
 [ext_resource type="Texture2D" uid="uid://b055g77h081gr" path="res://Walking down farmer-1.png.png" id="5_sudyf"]

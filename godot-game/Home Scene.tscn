@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=4 uid="uid://cdrtq37isbgq4"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_pmush"]
+[ext_resource type="Script" path="res://farm_player.gd" id="1_lyjrp"]
 [ext_resource type="Texture2D" uid="uid://b055g77h081gr" path="res://Walking down farmer-1.png.png" id="2_2wqr8"]
 [ext_resource type="Texture2D" uid="uid://ede1b6kqrkoy" path="res://Walking down farmer-2.png.png" id="3_li5ci"]
 [ext_resource type="Texture2D" uid="uid://dsv1rmcr4cw3n" path="res://Walking farmer-1.png (1).png" id="4_fisoy"]
@@ -720,7 +720,7 @@ sources/1 = SubResource("TileSetAtlasSource_qk1wm")
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(553, 235)
 scale = Vector2(1.11486, 1.20929)
-script = ExtResource("1_pmush")
+script = ExtResource("1_lyjrp")
 metadata/_edit_group_ = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="player"]
